@@ -41,3 +41,18 @@ gem 'jbuilder', '~> 1.2'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'bootstrap-sass'
+gem 'devise'
+gem 'haml-rails'
+gem 'pg'
+gem 'simple_form', '>= 3.0.0.rc'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'html2haml'
+  gem 'hub', :require=>nil
+  gem 'quiet_assets'
+end
+
