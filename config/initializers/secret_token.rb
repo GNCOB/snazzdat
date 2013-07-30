@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Snazzdat::Application.config.secret_key_base = '939c6da9a4e9c2c79d7c7b407da668f7e9f84687542f1b7ab2f7bb8656709dfd3214c4dc0469608b52a9cf6c19c26dba351b1ad3da49db9dee0da94a584fd1d8'
+Snazzdat::Application.config.secret_key_base = '2d1f6681443d9c78d43784a6938e36a7edd351b0e5256e5a1fff8ef31c91d94dc1f7110ffefb7213800285f72778215480b71a1701b0db0205a86b99fb10951e'
