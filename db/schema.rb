@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802032533) do
+ActiveRecord::Schema.define(version: 20130803031804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.text     "address1"
+    t.text     "address2"
+    t.text     "city"
+    t.text     "state"
+    t.integer  "zip_code"
+    t.text     "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sizes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "waist"
+    t.float    "hips"
+    t.float    "neck"
+    t.float    "shoulder"
+    t.float    "inseam"
+    t.float    "height"
+    t.float    "foot"
+    t.float    "bust"
+    t.float    "back"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

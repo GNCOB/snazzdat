@@ -1,4 +1,9 @@
-%h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+.row
+  .col-lg-12
+    %h3
+      Hello
+      =current_user.first_name
+
+  .col-lg-3
+    %a{href:"#" , class:"thumbnail"}
+      %img{:alt => "", "data-src" => "holder.js/300x200"}/
