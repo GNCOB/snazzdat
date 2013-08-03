@@ -1,4 +1,8 @@
 Snazzdat::Application.routes.draw do
+  resources :partners
+
+  resources :appointments
+
   resources :addresses
 
   resources :sizes
