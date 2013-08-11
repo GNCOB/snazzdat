@@ -1,35 +1,51 @@
-.row
-  .col-6
-    %h3
-      Hello
-      =current_user.full_name
-.row
-  .col-3
-    %a.thumbnail{href:"#"}
-      %img{:alt => "", "data-src" => "holder.js/300x200"}/
-.row
-  .col-6
-    %h3
-      Sizes
-    %table.table-striped.table-bordered.col-12
-      %tbody
-        %tr
-          %td
-            Waist
-          %td
-            =current_user.size.waist
-        %tr
-          %td
-            Bust
-          %td
-            =current_user.size.bust
-        %tr
-          %td
-            Neck
-          %td
-            =current_user.size.neck
-        %tr
-          %td
-            Shoulder
-          %td
-            =current_user.size.shoulder
+-if !current_user.nil?
+  .row
+    .col-6
+      %h3
+        Hello
+        =current_user.full_name
+
+  .row
+    .col-3
+      %a.thumbnail{href:"#"}
+        %img{:alt => "", "data-src" => "holder.js/300x200"}/
+  .row.clearfix
+    .col-6
+      %h3
+        Sizes
+      %table.table-striped.table-bordered.col-12
+        %tbody
+          %tr
+            %td
+              Waist
+            %td
+              =current_user.size.waist
+          %tr
+            %td
+              Hips
+            %td
+              =current_user.size.hips
+          %tr
+            %td
+              Bust
+            %td
+              =current_user.size.bust
+          %tr
+            %td
+              Neck
+            %td
+              =current_user.size.neck
+          %tr
+            %td
+              Shoulder
+            %td
+              =current_user.size.shoulder
+      .row
+        .col-12.pull-right
+          %a.btn.btn-block{href:edit_user_size_path(:user_id => current_user.id, :id=> current_user.size.id) } Edit
+
+-else
+  .row
+    .col-12
+      Do you have an account?
+      %a.btn.btn-primary.btn-block{href:new_user_session_path} Login

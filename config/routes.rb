@@ -3,11 +3,12 @@ Snazzdat::Application.routes.draw do
 
   resources :appointments
 
-  resources :addresses
 
-  resources :sizes
 
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
-  resources :users
+  resources :users do
+    resources :sizes
+    resources :addresses
+  end
 end
