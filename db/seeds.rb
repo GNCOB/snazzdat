@@ -10,3 +10,8 @@ User.create :first_name => 'Nii', :last_name => 'Ankrah',  :email => 'nankrah007
 User.create :first_name => 'Selasie', :last_name => 'Ankrah',  :email => 'nankrah007+second@gmail.com', :role => 'user', :password => 'password', :password_confirmation => 'password'
 User.create :first_name => 'Annelie', :last_name => 'Ankrah',  :email => 'nankrah007+third@gmail.com', :role => 'vendor', :password => 'password', :password_confirmation => 'password'
 puts 'FINISHED CREATING USERS'
+
+puts 'DEFAULT SIZES'
+Size.create :waist => 20, :hips => 10, :bust => 38, :neck => 6, :shoulder => 40, :user_id => 1
+
+puts 'FINISHED CREATING SIZES'
