@@ -12,6 +12,8 @@ gem 'devise'
 gem 'haml-rails'
 gem 'pg'
 gem 'simple_form', '>= 3.0.0.rc'
+gem 'font-awesome-rails'
+gem 'rails_12factor'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
