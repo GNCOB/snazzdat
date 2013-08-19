@@ -1,10 +1,10 @@
-.navbar.navbar-fixed-top.navbar-inverse
+#sd-navigation.navbar.navbar-fixed-top.navbar-inverse
   .container
     %button.navbar-toggle{type:'button', data:{toggle:'collapse', target:'.navbar-responsive-collapse'}}
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to "Snazzdat", root_path, :class => 'navbar-brand'
+    = link_to "SnazzDat", root_path, :class => 'navbar-brand'
     .nav-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav.pull-right
         - if user_signed_in?

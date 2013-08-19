@@ -4,48 +4,40 @@
       %h3
         Hello
         =current_user.full_name
-
-  .row
-    .col-3
-      %a.thumbnail{href:"#"}
-        %img{:alt => "", "data-src" => "holder.js/300x200"}/
   .row.clearfix
-    .col-6
+    .col-12
       %h3
-        Sizes
-      %table.table-striped.table-bordered.col-12
-        %tbody
-          %tr
-            %td
-              Waist
-            %td
-              =current_user.size.waist
-          %tr
-            %td
-              Hips
-            %td
-              =current_user.size.hips
-          %tr
-            %td
-              Bust
-            %td
-              =current_user.size.bust
-          %tr
-            %td
-              Neck
-            %td
-              =current_user.size.neck
-          %tr
-            %td
-              Shoulder
-            %td
-              =current_user.size.shoulder
+        Size Profile
+      .size-profile-block
+        .size-profile
+          .pull-right
+            =current_user.size.waist
+          Waist
+        .size-profile
+          .pull-right
+            =current_user.size.hips
+          Hips
+        .size-profile
+          .pull-right
+            =current_user.size.bust
+          Bust
+        .size-profile
+          .pull-right
+            =current_user.size.neck
+          Neck
+        .size-profile
+          .pull-right
+            =current_user.size.shoulder
+          Shoulder
       .row
         .col-12.pull-right
-          %a.btn.btn-block{href:edit_user_size_path(:user_id => current_user.id, :id=> current_user.size.id) } Edit
+          %a.btn.btn-primary.btn-block{href:edit_user_size_path(:user_id => current_user.id, :id=> current_user.size.id) } Edit
+  =current_user.size.as_json
 
 -else
   .row
-    .col-12
-      Do you have an account?
+    .col-6
+      %h3.weight-lighter LOG IN
       %a.btn.btn-primary.btn-block{href:new_user_session_path} Login
+    .col-6
+      %h3.weight-lighter SIGN UP

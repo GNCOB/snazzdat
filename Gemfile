@@ -12,6 +12,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'pg'
 gem 'simple_form', '>= 3.0.0.rc'
+gem 'bourbon'
 gem 'font-awesome-rails'
 gem 'rails_12factor'
 group :development do

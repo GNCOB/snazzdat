@@ -8,21 +8,30 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require font-awesome
- *= require_tree .
 */
+@import "bourbon";
+@import "bootstrap.min.css";
+@import "font-awesome.css";
+@import "sizes.css.scss";
 body {
   padding-top: 70px;
+  background: #E5CAE7;
+}
+
+.weight-lighter {
+  font-weight: lighter;
 }
 .content {
-  background-color: #eee;
+  background-color: #fff;
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+#sd-navigation {
+  background: #856292;
+  color: #fff;
+  a {
+    color: #fff;
+  }
 }
