@@ -4,18 +4,19 @@ class SearchController < ApplicationController
   # GET /search
   # GET /search.json
   def index
-    @results = ''
+    @results = nil
     if params[:search]
       search_terms = {
           format:'json',
           userlocation: '20852',
           Keywords: params[:search],
           Page: '1',
-          pageSize: '100',
+          pageSize: '30',
           requestorid:'13cda9a1dc2c69e5',
           apikey: 'aIzdHVPfx5e20bav-Lx7xtdP7MK7usst'
       }
-      @results = Retailigence::Product.search search_terms
+      r = Retailigence::Product.search search_terms
+      @results = r['RetailigenceSearchResult']['results']
     end
   end
 

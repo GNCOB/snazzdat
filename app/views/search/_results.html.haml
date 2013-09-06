@@ -1,0 +1,12 @@
+%h1 Search Results
+
+.row
+  -@results.each do |result|
+    .col-sm-6.col-md-6
+      .thumbnail
+        =image_tag result['SearchResult']['product']['images'][1]['ImageInfo']['link'], class:'img-thumbnail'
+        .caption
+          %h3=result['SearchResult']['product']['name']
+          %p
+            =result['SearchResult']['product']['msrpCurrency']
+            =result['SearchResult']['product']['msrp']

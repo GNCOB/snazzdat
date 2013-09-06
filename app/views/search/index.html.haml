@@ -1,9 +1,8 @@
-%h1 Listing search
+%h1 Product search
 %hr/
 
 = render 'form'
 
 
-
-%h3 Results
-=@results
+-if !@results.nil?
+  =render 'results'
