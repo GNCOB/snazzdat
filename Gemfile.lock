@@ -1,5 +1,6 @@
-PATH
-  remote: ../retailigence
+GIT
+  remote: https://github.com/sanarchy7/retailigence.git
+  revision: 0c1ebacc7513487e7a1c4431281fd9d4026b033a
   specs:
     retailigence (0.1)
       httparty
