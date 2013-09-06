@@ -1,38 +1,13 @@
 -if !current_user.nil?
-  .row
-    .col-6
-      %h3
-        Hello
-        =current_user.full_name
-  .row.clearfix
+  #sd-user-profile.row-fluid.clearfix
     .col-12
-      %h3
-        Size Profile
-      .size-profile-block
-        .size-profile
-          .pull-right
-            =current_user.size.waist
-          Waist
-        .size-profile
-          .pull-right
-            =current_user.size.hips
-          Hips
-        .size-profile
-          .pull-right
-            =current_user.size.bust
-          Bust
-        .size-profile
-          .pull-right
-            =current_user.size.neck
-          Neck
-        .size-profile
-          .pull-right
-            =current_user.size.shoulder
-          Shoulder
-      .row
-        .col-12.pull-right
-          %a.btn.btn-primary.btn-block{href:edit_user_size_path(:user_id => current_user.id, :id=> current_user.size.id) } Edit
-  =current_user.size.as_json
+      .image-thumb.col-4
+        =image_tag('photo.jpeg', {class:'img-polaroid'})
+      .profile-name.col7
+        %h4=current_user.full_name
+        %small Location, State, Country
+
+  =link_to "Size Profile", user_size_path(:user_id => current_user.id, :id => current_user.size.id), :class=>'btn btn-block btn-primary'
 
 -else
   .row

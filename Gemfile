@@ -15,6 +15,9 @@ gem 'simple_form', '>= 3.0.0.rc'
 gem 'bourbon'
 gem 'font-awesome-rails'
 gem 'rails_12factor'
+gem 'retailigence', :path => '../retailigence'
+gem 'active_attr'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
