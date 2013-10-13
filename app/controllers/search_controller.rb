@@ -12,7 +12,7 @@ class SearchController < ApplicationController
           userlocation: "#{@current_location[:lat]}, #{@current_location[:lng]}" ,
           Keywords: params[:search],
           Page: '1',
-          pageSize: '30',
+          pageSize: '50',
           requestorid:'13cda9a1dc2c69e5',
           apikey: 'aIzdHVPfx5e20bav-Lx7xtdP7MK7usst',
           range: '10',
