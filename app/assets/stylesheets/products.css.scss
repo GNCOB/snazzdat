@@ -1,0 +1,32 @@
+.product {
+  margin-bottom: 20px;
+  .product-image {
+    width: 250px;
+    height: 340px;
+    background: #fff;
+    overflow: hidden;
+    img {
+      max-width: inherit;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+
+  .description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 250px;
+
+    .description-item {
+      border-bottom: solid 1px #ccc;
+      padding: 10px 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+  }
+}

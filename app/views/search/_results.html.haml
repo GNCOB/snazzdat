@@ -1,12 +1,23 @@
-%h1 Search Results
-
-.row
-  -@results.each do |result|
-    .col-sm-6.col-md-6
-      .thumbnail
-        =image_tag result['SearchResult']['product']['images'][1]['ImageInfo']['link'], class:'img-thumbnail'
-        .caption
-          %h3=result['SearchResult']['product']['name']
-          %p
-            =result['SearchResult']['product']['msrpCurrency']
-            =result['SearchResult']['product']['msrp']
+.container
+  -@products.in_groups_of(2).each do |products_array|
+    .row
+      -for product in products_array
+        .col-xs-6.product
+          .product-image
+            =image_tag product['images'][1]['ImageInfo']['link']
+          .description
+            .name.description-item
+              %strong=product['name']
+            -if !product['brand'].blank?
+              .brand.description-item
+                =product['brand']
+            .price.description-item
+              Price:
+              =product['msrpCurrency']
+              =product['msrp']
+            .size.description-item
+              - if !product['size'].blank?
+                Size(s):
+                =product['size'][0]
+              - else
+                No size information available

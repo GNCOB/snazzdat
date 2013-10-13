@@ -4,19 +4,32 @@ class SearchController < ApplicationController
   # GET /search
   # GET /search.json
   def index
-    @results = nil
+    @products = []
     if params[:search]
+
       search_terms = {
           format:'json',
-          userlocation: '20852',
+          userlocation: "#{@current_location[:lat]}, #{@current_location[:lng]}" ,
           Keywords: params[:search],
           Page: '1',
           pageSize: '30',
           requestorid:'13cda9a1dc2c69e5',
-          apikey: 'aIzdHVPfx5e20bav-Lx7xtdP7MK7usst'
+          apikey: 'aIzdHVPfx5e20bav-Lx7xtdP7MK7usst',
+          range: '10',
+          rcategory: 'Apparel'
+
+
       }
-      r = Retailigence::Product.search search_terms
-      @results = r['RetailigenceSearchResult']['results']
+      product_search =  Retailigence::Product.new
+      results = product_search.search search_terms
+      puts '#######'
+      puts results
+      puts '######'
+      results['RetailigenceSearchResult']['results'].each do |r|
+        @products << r['SearchResult']['product']
+      end
+
+
     end
   end
 

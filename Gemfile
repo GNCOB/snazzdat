@@ -16,7 +16,8 @@ gem 'bourbon'
 gem 'font-awesome-rails'
 gem 'rails_12factor'
 gem 'retailigence', :git => "https://github.com/sanarchy7/retailigence.git"
-gem 'active_attr'
+gem 'geokit'
+gem 'geokit-rails'
 
 group :development do
   gem 'better_errors'

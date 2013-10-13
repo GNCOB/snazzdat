@@ -13,10 +13,22 @@
 
     #main{:role => "main"}
       .container
-        .row.fluid
-          .col-12.col-lg-8
+        .row
+          .col-sm-12
             = render 'layouts/messages'
             = yield
         %footer
       / ! end of .container
     / ! end of #main
+    #geolocate_error
+
+:javascript
+  $(function(){
+    var current_location = #{@current_location.nil? ? 'undefined' : @current_location.to_json};
+    if(current_location === undefined) {
+      getUserLocation();
+    }
+     else {
+
+    }
+  });

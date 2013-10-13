@@ -1,3 +1,5 @@
+=render "search/form"
+
 -if !current_user.nil?
   #sd-user-profile.row-fluid.clearfix
     .col-12
@@ -9,13 +11,11 @@
 
   =link_to "Size Profile", user_size_path(:user_id => current_user.id, :id => current_user.size.id), :class=>'btn btn-block btn-primary'
 
-  %h5 Search for Products
-
-  =render "search/form"
 -else
+  #splash-logo.text-center
+    =image_tag asset_path 'splash_logo.png'
   .row
-    .col-6
-      %h3.weight-lighter LOG IN
-      %a.btn.btn-primary.btn-block{href:new_user_session_path} Login
-    .col-6
+    .col-xs-12
+      %a.btn.btn-primary{href:new_user_session_path} Login
+    .col-xs-12
       %h3.weight-lighter SIGN UP

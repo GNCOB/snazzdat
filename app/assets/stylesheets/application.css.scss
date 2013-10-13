@@ -12,10 +12,14 @@
 @import "bourbon";
 @import "bootstrap.min";
 @import "font-awesome";
+@import "home";
 @import "sizes";
+@import "products";
 
 body {
   padding-top: 70px;
+  background: #353535;
+  color: #fff;
 }
 
 .weight-lighter {
