@@ -4,9 +4,12 @@
       -for product in products_array
         .col-xs-6.product
           .product-image
-            =image_tag product['product']['images'][1]['ImageInfo']['link']
+            -if !product['product']['images'].blank?
+              =image_tag product['product']['images'][1]['ImageInfo']['link']
+            -else
+              Image coming soon
           .description
-            .name.description-item
+            .name
               %strong=product['product']['name']
           .row
             .col-sm-6
@@ -14,7 +17,7 @@
                 .brand.description-item
                   Brand:
                   =product['product']['brand']
-              .price.description-item
+              .price
                 Price:
                 -if !product['product']['msrpCurrency'].blank?
                   $
