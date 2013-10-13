@@ -26,7 +26,7 @@ class SearchController < ApplicationController
       puts results
       puts '######'
       results['RetailigenceSearchResult']['results'].each do |r|
-        @products << r['SearchResult']['product']
+        @products << r['SearchResult']
       end
 
 
