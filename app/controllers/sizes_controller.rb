@@ -29,6 +29,7 @@ class SizesController < ApplicationController
   end
 
   def update
+    @size.attributes = {user: current_user.to_pointer}
     if @size.update(size_params)
       flash[:notice] = "Profile Updated."
     else
@@ -38,11 +39,11 @@ class SizesController < ApplicationController
 
   private
     def get_size
-      @size = Size.where(objectId: params[:id], user_id: current_user.id).first
+      @size = Size.where(objectId: params[:id], user: current_user.to_pointer).first
 
     end
 
     def size_params
-      params.require(:size).permit(:neck, :chest, :sleeve, :bust, :waist, :hips, :inseam, :height, :weight, :body_shape_code, :user_id)
+      params.require(:size).permit(:neck, :chest, :sleeve, :bust, :waist, :hips, :inseam, :height, :weight, :body_shape_code, :user)
     end
 end

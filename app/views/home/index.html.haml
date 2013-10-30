@@ -1,10 +1,11 @@
-#splash-logo.text-center
-  =image_tag asset_path 'splash_logo.png'
+#splash-logo
+  .text-center
+    =image_tag asset_path 'splash_logo.png'
+
 
 -if !current_user.nil?
-  %a.btn.btn-default{href: log_out_path} Sign Out
 
-  =#link_to "Size Profile", user_size_path(:user_id => current_user.id, :id => current_user.size.id), :class=>'btn btn-block btn-primary'
+  %a.btn.btn-default{href: log_out_path} Sign Out
 
 -else
   .text-center

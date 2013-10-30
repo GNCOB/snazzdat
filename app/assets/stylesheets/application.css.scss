@@ -18,7 +18,7 @@
 @import "bootstrap-windows.min";
 
 body {
-  background: #fff;
+  background: #9b59b6;
 }
 .container.window {
   padding-top: 50px;
@@ -37,8 +37,9 @@ body {
 
 /****Begin Navigation******/
 
-#sd-navigation {
-  background: #856292;
+#phone-nav {
+  background: #8e44ad;
+  border-bottom: #8e44ad;
   color: #fff;
   a {
     color: #fff;

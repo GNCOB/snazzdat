@@ -6,6 +6,8 @@ class User < ParseUser
 
   fields :email, :full_name, :gender, :terms_of_use
 
-
+  def size
+    Size.where(user: self.to_pointer).first
+  end
 
 end
