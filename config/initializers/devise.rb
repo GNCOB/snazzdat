@@ -1,3 +1,4 @@
+=begin
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -246,3 +247,4 @@ Devise.setup do |config|
 
   config.secret_key = '949f16d4c4a28ddb3e79b37f8cec979d209ec923fac1915c11c336fb8ce5ab5a48bd9a9bb605515de3e949f77d932d99062a664ed069bd23f22dd75c193806f9'
 end
+=end

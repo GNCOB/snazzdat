@@ -1,14 +1,13 @@
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+class User < ParseUser
+  validates_presence_of :username, message: 'Username is a required field'
+  validates_presence_of :email, message: 'Email is a required field'
+  validates_presence_of :password, on: :create
+  validates_presence_of :terms_of_use
 
-  has_one :size
-  has_one :address
+  fields :email, :full_name, :gender, :terms_of_use
 
-  def full_name
-    self.first_name+" "+self.last_name
+  def size
+    Size.where(user_id: self.id).first
   end
+
 end

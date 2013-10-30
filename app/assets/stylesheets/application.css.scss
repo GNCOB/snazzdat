@@ -15,11 +15,14 @@
 @import "home";
 @import "sizes";
 @import "products";
+@import "bootstrap-windows.min";
 
 body {
-  padding-top: 70px;
-  background: #353535;
-  color: #fff;
+  background: #fff;
+}
+.container.window {
+  padding-top: 50px;
+  padding-bottom: 100px;
 }
 
 .weight-lighter {
@@ -37,6 +40,20 @@ body {
 #sd-navigation {
   background: #856292;
   color: #fff;
+  a {
+    color: #fff;
+  }
+}
+
+#navi-avatar {
+  color: #fff;
+  .pull-left {
+    padding: 10px;
+    &:first-child {
+      width: 50px;
+      margin-right: 10px;
+    }
+  }
   a {
     color: #fff;
   }

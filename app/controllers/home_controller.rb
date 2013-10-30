@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
+
   def index
-    @users = User.all
+    puts '########'
+    puts current_user.inspect
+    puts '######'
   end
 end

@@ -1,31 +1,47 @@
 class SizesController < ApplicationController
   before_action :get_size
 
-  def index
+  def new
+    @size = Size.new(user_id: current_user.id)
+  end
 
+  def create
+    @size = Size.new(size_params)
+    if @size.save
+      redirect_to root_url
+    else
+      render action: :new
+    end
   end
 
   def show
 
   end
 
-  def edit
+  def index
 
   end
 
+
+  def edit
+    #redirect_to root_url if @size.blank?
+  end
+
   def update
-    unless params[:size].empty?
-      @size.update(size_params)
+    if @size.update(size_params)
+      flash[:notice] = "Profile Updated."
+    else
     end
-    render 'home/index'
+    render action: :edit
   end
 
   private
     def get_size
-      @size = params[:id].nil? ? Size.find_by_user_id(params[:user_id]) : Size.find(params[:id])
+      @size = Size.where(objectId: params[:id], user_id: current_user.id).first
+
     end
 
     def size_params
-      params.require(:size).permit(:waist, :hips, :neck, :shoulder, :inseam, :height, :foot, :bust)
+      params.require(:size).permit(:neck, :chest, :sleeve, :bust, :waist, :hips, :inseam, :height, :weight, :body_shape_code, :user_id)
     end
 end

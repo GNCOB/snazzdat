@@ -1,0 +1,46 @@
+=simple_form_for @user, html: {class: 'form-horizontal'} do |f|
+  .form-group{class: @user.errors[:username].size > 0 ? 'has-error' : ''}
+    =f.label :username, class: 'sr-only'
+    .col-sm-9
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-user
+        =f.input_field :username, class: 'form-control', placeholder: 'username'
+      .help-block
+        =@user.errors[:username].first
+
+  .form-group{class: @user.errors[:email].size > 0 ? 'has-error' : ''}
+    =f.label :email, class: 'sr-only'
+    .col-sm-9
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-envelope
+        =f.input_field :email, type: :email, class: 'form-control', placeholder: 'email address'
+      .help-block
+        =@user.errors[:email].first
+
+  .form-group{class: @user.errors[:full_name].size > 0 ? 'has-error' : ''}
+    =f.label :full_name, class: 'sr-only'
+    .col-sm-9
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-user
+        =f.input_field :full_name, class: 'form-control', placeholder: 'full name'
+      .help-block
+        =@user.errors[:full_name].first
+
+  .form-group{class: @user.errors[:password].size > 0 ? 'has-error' : ''}
+    =f.label :password, class: 'sr-only'
+    .col-sm-9
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-lock
+        =f.input_field :password, type: 'password', class: 'form-control', placeholder: 'password'
+      .help-block
+        =@user.errors[:password].first
+
+  .form-group
+    .col-sm-9
+      =f.button :submit, 'Sign Up', class: 'btn btn-primary'
+
+%a{href:log_in_path} Have an account? Sign In

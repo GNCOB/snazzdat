@@ -20,13 +20,8 @@
         .pull-right
           =size.neck
         Neck
-      .size-profile
-        .pull-right
-          =size.shoulder
-        Shoulder
--if !current_user.nil?
   .row
     .col-12.pull-right
-      %a.btn.btn-primary.btn-block{href:edit_user_size_path(:user_id => current_user.id, :id=>size.id) } Edit
+      %a.btn.btn-primary.btn-block{href:edit_user_size_path(:user_id => 1, :id=>size.id) } Edit
 
   =size.as_json

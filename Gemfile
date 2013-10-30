@@ -8,9 +8,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 #gem 'bootstrap-sass'
-gem 'devise'
+#gem 'devise'
 gem 'haml-rails'
-gem 'pg'
+gem 'pg', '~> 0.16.0'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'bourbon'
 gem 'font-awesome-rails'
@@ -18,11 +18,12 @@ gem 'rails_12factor'
 gem 'retailigence', :git => "https://github.com/sanarchy7/retailigence.git"
 gem 'geokit'
 gem 'geokit-rails'
+gem "kaminari" # optional for pagination support
+gem "parse_resource", "~> 1.8.0"
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
-  gem 'html2haml'
+  gem 'binding_of_caller'
   gem 'hub', :require=>nil
   gem 'quiet_assets'
 end

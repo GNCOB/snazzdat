@@ -11,16 +11,12 @@
   %body{:class => "#{controller_name} #{action_name}"}
     = render 'layouts/navigation'
 
-    #main{:role => "main"}
-      .container
-        .row
-          .col-sm-12
-            = render 'layouts/messages'
-            = yield
-        %footer
-      / ! end of .container
-    / ! end of #main
-    #geolocate_error
+    .container.window.window-center.window-left-slide.window-right-slide
+      .row
+        .col-sm-12
+          = render 'layouts/messages'
+          = yield
+      %footer
 
 :javascript
   $(function(){

@@ -1,21 +1,56 @@
-#sd-navigation.navbar.navbar-fixed-top.navbar-inverse
-  .container
-    %button.navbar-toggle{type:'button', data:{toggle:'collapse', target:'.navbar-responsive-collapse'}}
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-    = link_to "SNAZZDAT", root_path, :class => 'navbar-brand'
-    .nav-collapse.collapse.navbar-responsive-collapse
-      %ul.nav.navbar-nav.pull-right
-        - if user_signed_in?
-          %li
-            = link_to 'Logout', destroy_user_session_path, :method=>'delete'
-        - else
-          %li
-            = link_to 'Login', new_user_session_path
-        - if user_signed_in?
-          %li
-            = link_to 'Edit account', edit_user_registration_path
-        - else
-          -#  %li
-            = link_to 'Sign up', new_user_registration_path
+#desktop-nav.navbar.navbar-default.navbar-fixed-top.hidden-xs.hidden-sm
+  .contain
+    .navbar-header
+      %a.navbar-brand{href: root_path} SnazzDat
+    -#%ul.nav.navbar-nav
+      %li
+        %a{href: "#"} Nav
+      %li
+        %a{href: "#"} Nav
+      %li
+        %a{href: "#"} Nav
+      %li
+        %a{href: "#"} Nav
+    %ul.nav.navbar-nav.navbar-right
+      - if current_user.nil?
+        %li
+          %a{href: log_in_path} Sign In
+        %li
+          %a{href: sign_up_path} Sign Up
+      - else
+        %li
+          %a{href: log_out_path} Sign Out
+
+#phone-nav.navbar.navbar-default.window.window-center.window-left-slide.window-right-slide.navbar-fixed-top.visible-xs.visible-sm.hidden-print{role: "navigation"}
+  .navbar-inner
+    .container
+      %a.navbar-brand{href: root_path}
+        SnazzDat
+      %button.btn.btn-default.btn-left{"data-target" => "#navi-left", "data-toggle" => "window", type: "button"}
+        %i.fa.fa-align-justify
+
+#navi-left.window.window-left.window-invert.visible-xs.visible-sm.hidden-print{"aria-hidden" => "true"}
+  .contain
+    %ul.nav.nav-stacked.nav-striped
+
+      -unless current_user.nil?
+        %li#navi-avatar.clearfix
+          %a{href: user_path(current_user.id)}
+            .pull-left
+              %i.fa.fa-user.fa-3x
+            .pull-left
+              .text-ellipsis
+                %strong= current_user.username
+              %span.ellipsis= current_user.full_name
+        %li
+          =link_to "Size Profile", edit_user_sizes_path(user_id: current_user.id)
+
+      %li.li-footer.text-center
+        %div
+          %a{href: "#"} Terms of Use
+          %a{href: "#"} Privacy
+        %small.text-muted &copy; 2013 SnazzDat Inc.
+  -#.window-footer
+    -unless current_user.nil?
+      %a{href: user_path(current_user.id)}
+        %span.ellipsis= current_user.full_name

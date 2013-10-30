@@ -1,13 +1,3 @@
-= simple_form_for(@size, :url => user_size_path, :html => { :method => :put, :class => 'form-vertical' }) do |f|
-  =f.input :waist
-  =f.input :hips
-  =f.input :neck
-  =f.input :shoulder
-  =f.input :inseam
-  =f.input :height
-  =f.input :foot
-  =f.input :bust
-  =f.submit :submit
+%h3 Edit Your Size Profile
 
-
-=@size.as_json
+=render 'form'
