@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    if @user.authenticate(params[:user][:username], params[:user][:password])
+    if @user.create
       redirect_to root_url, notice: 'Account created successfully!'
     else
       render action: :new
