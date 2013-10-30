@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/sanarchy7/parse_resource.git
+  revision: 97cb90747abd15c4e23c553b77ff9b3a8b3973cd
+  specs:
+    parse_resource (1.8.0)
+      activemodel
+      activesupport
+      json
+      rest-client
+
+GIT
   remote: https://github.com/sanarchy7/retailigence.git
   revision: 90df2a0b3550cca5c70603ff3a801acb0ffcf874
   specs:
@@ -91,11 +101,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
-    parse_resource (1.8.0)
-      activemodel
-      activesupport
-      json
-      rest-client
     pg (0.16.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
@@ -171,7 +176,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
-  parse_resource (~> 1.8.0)
+  parse_resource!
   pg (~> 0.16.0)
   quiet_assets
   rails (= 4.0.0)
