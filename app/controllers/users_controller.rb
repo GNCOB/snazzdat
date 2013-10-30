@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit]
+  before_action :authenticate_user, only: [:edit, :update]
 
 
   def show
@@ -13,7 +14,15 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.create
-      redirect_to root_url, notice: 'Account created successfully!'
+      user = User.authenticate params[:user][:username], params[:user][:password]
+      if user
+        session[:user_id] = user.id
+        redirect_to root_url, notice: 'Account created successfully!'
+      else
+        render action: :new
+
+      end
+
     else
       render action: :new
     end

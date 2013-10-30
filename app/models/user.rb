@@ -6,8 +6,6 @@ class User < ParseUser
 
   fields :email, :full_name, :gender, :terms_of_use
 
-  def size
-    Size.where(user_id: self.id).first
-  end
+
 
 end

@@ -1,5 +1,6 @@
 class SizesController < ApplicationController
-  before_action :get_size
+  before_action :authenticate_user
+  before_action :get_size, except: [:create, :new]
 
   def new
     @size = Size.new(user_id: current_user.id)

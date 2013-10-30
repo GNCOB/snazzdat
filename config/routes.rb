@@ -9,7 +9,7 @@ Snazzdat::Application.routes.draw do
   get "/logout" => "sessions#destroy", as: :log_out
   get "/signup" => "users#new", as: :sign_up
   resources :users, only: [:new, :create, :edit, :update, :show] do
-    resource :sizes
+    resources :sizes
     resources :addresses
     resources :appointments
   end
