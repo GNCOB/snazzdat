@@ -1,7 +1,5 @@
 Snazzdat::Application.routes.draw do
-
   resources :locations
-
   root :to => "home#index"
   post '/location/set', to: 'application#set_location'
   get '/location/get', to: 'application#get_location'
@@ -10,8 +8,6 @@ Snazzdat::Application.routes.draw do
   get "/signup" => "users#new", as: :sign_up
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :sizes
-    resources :addresses
-    resources :appointments
   end
   resources :sessions
   resources :search, only: [:index]

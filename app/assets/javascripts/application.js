@@ -13,3 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).on('click', '#js-product-search-button', function(){
+    $('.search-container').toggle(400, 'linear');
+    setTimeout(function(){
+        $(".search-container .form-control").focus();
+    }, 100);
+});

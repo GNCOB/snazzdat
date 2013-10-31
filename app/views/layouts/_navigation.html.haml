@@ -2,15 +2,7 @@
   .contain
     .navbar-header
       %a.navbar-brand{href: root_path} SnazzDat
-    -#%ul.nav.navbar-nav
-      %li
-        %a{href: "#"} Nav
-      %li
-        %a{href: "#"} Nav
-      %li
-        %a{href: "#"} Nav
-      %li
-        %a{href: "#"} Nav
+
     %ul.nav.navbar-nav.navbar-right
       - if current_user.nil?
         %li
@@ -27,7 +19,13 @@
       %a.navbar-brand{href: root_path}
         SnazzDat
       %button.btn.btn-default.btn-left{"data-target" => "#navi-left", "data-toggle" => "window", type: "button"}
-        %i.fa.fa-align-justify
+        %i.fa.fa-2x.fa-align-justify
+
+      %a#js-product-search-button{href: '#'}
+        %i.fa.fa-2x.fa-search
+
+.container.search-container
+  = render 'search/form'
 
 #navi-left.window.window-left.window-invert.visible-xs.visible-sm.hidden-print{"aria-hidden" => "true"}
   .contain
@@ -41,7 +39,7 @@
             .pull-left
               .text-ellipsis
                 %strong= current_user.username
-              %span.ellipsis= current_user.full_name
+              %span.ellipsis= current_user.name
         %li
           =link_to "Size Profile", user_sizes_path(user_id: current_user.id)
 

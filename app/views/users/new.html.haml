@@ -5,7 +5,7 @@
       .input-group
         %span.input-group-addon
           %i.fa.fa-user
-        =f.input_field :username, class: 'form-control', placeholder: 'username'
+        =f.input_field :username, class: 'form-control', placeholder: 'username', label: false
       .help-block
         =@user.errors[:username].first
 
@@ -19,15 +19,15 @@
       .help-block
         =@user.errors[:email].first
 
-  .form-group{class: @user.errors[:full_name].size > 0 ? 'has-error' : ''}
-    =f.label :full_name, class: 'sr-only'
+  .form-group{class: @user.errors[:name].size > 0 ? 'has-error' : ''}
+    =f.label :name, class: 'sr-only'
     .col-sm-9
       .input-group
         %span.input-group-addon
           %i.fa.fa-user
-        =f.input_field :full_name, class: 'form-control', placeholder: 'full name'
+        =f.input_field :name, class: 'form-control', placeholder: 'name'
       .help-block
-        =@user.errors[:full_name].first
+        =@user.errors[:name].first
 
   .form-group{class: @user.errors[:password].size > 0 ? 'has-error' : ''}
     =f.label :password, class: 'sr-only'
