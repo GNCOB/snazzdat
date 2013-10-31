@@ -4,13 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   #before_action :get_location
   helper_method :current_user
-
-
-  def get_location
-    @current_location = session[:current_location]
-
-    #render json:  { current_location: session[:current_location] }
-  end
+  helper_method :get_location
 
   def set_location
     if !params[:lat].blank? && !params[:lng].blank?
@@ -32,5 +26,8 @@ class ApplicationController < ActionController::Base
     redirect_to log_in_path  if current_user.nil?
   end
 
+  def get_location
+    @current_location ||= session[:current_location]
+  end
 
 end

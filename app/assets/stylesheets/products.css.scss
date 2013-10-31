@@ -1,12 +1,9 @@
 .product {
   margin-bottom: 20px;
   .product-image {
-    height: 340px;
     background: #fff;
     overflow: hidden;
     img {
-      max-width: inherit;
-      display: block;
       margin: 0 auto;
     }
   }

@@ -9,12 +9,12 @@ class SearchController < ApplicationController
 
       search_terms = {
           format:'json',
-          userlocation: "#{@current_location[:lat]}, #{@current_location[:lng]}" ,
+          userlocation: "#{get_location[:lat]}, #{get_location[:lng]}" ,
           Keywords: params[:search],
           Page: '1',
           pageSize: '50',
           requestorid:'13cda9a1dc2c69e5',
-          apikey: 'aIzdHVPfx5e20bav-Lx7xtdP7MK7usst',
+          apikey: Retailigence::API_KEY,
           range: '10',
           rcategory: 'Apparel'
 

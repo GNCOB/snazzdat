@@ -64,7 +64,7 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.0.2)
-    font-awesome-rails (4.0.0.0)
+    font-awesome-rails (4.0.1.0)
       railties (>= 3.2, < 5.0)
     haml (4.0.3)
       tilt
@@ -169,10 +169,11 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
+  mime-types (>= 1.16)
   parse_resource!
   pg (~> 0.16.0)
   quiet_assets
-  rails (= 4.0.0)
+  rails (>= 4.0.0)
   rails_12factor
   retailigence!
   sass-rails (~> 4.0.0)
