@@ -1,8 +1,8 @@
-=simple_form_for @user, html: {class: 'form-horizontal new-user-form'} do |f|
+=simple_form_for @user, html: {class: 'form-horizontal new-user-form user-form', role: 'form'} do |f|
   .form-group{class: @user.errors[:username].size > 0 ? 'has-error' : ''}
     =f.label :username, class: 'sr-only'
     .col-sm-9
-      .input-group
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-user
         =f.input_field :username, class: 'form-control', placeholder: 'username', label: false
@@ -12,7 +12,7 @@
   .form-group{class: @user.errors[:email].size > 0 ? 'has-error' : ''}
     =f.label :email, class: 'sr-only'
     .col-sm-9
-      .input-group
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-envelope
         =f.input_field :email, type: :email, class: 'form-control', placeholder: 'email address'
@@ -22,7 +22,7 @@
   .form-group{class: @user.errors[:name].size > 0 ? 'has-error' : ''}
     =f.label :name, class: 'sr-only'
     .col-sm-9
-      .input-group
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-user
         =f.input_field :name, class: 'form-control', placeholder: 'name'
@@ -32,7 +32,7 @@
   .form-group{class: @user.errors[:password].size > 0 ? 'has-error' : ''}
     =f.label :password, class: 'sr-only'
     .col-sm-9
-      .input-group
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-lock
         =f.input_field :password, type: 'password', class: 'form-control', placeholder: 'password'
@@ -42,16 +42,20 @@
   .form-group{class: @user.errors[:password].size > 0 ? 'has-error' : ''}
     =f.label :password_confirmation, class: 'sr-only'
     .col-sm-9
-      .input-group
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-lock
         =f.input_field :password_confirmation, type: 'password', class: 'form-control', placeholder: 'password confirmation'
       .help-block
         =@user.errors[:password_confirmation].first
 
+  .checkbox
+    =f.input :terms_of_use, as: :boolean, inline_label: "I Agree to the Terms of Use", label: false
+
+
   .form-group
     .col-sm-9
-      =f.button :submit, 'Sign Up', class: 'btn btn-primary'
+      =f.button :submit, 'Sign Up', class: 'btn btn-primary btn-lg'
 
 %a{href:log_in_path} Have an account? Sign In
 
@@ -59,6 +63,11 @@
 :javascript
   $('.new-user-form').on('submit', function(e){
       //e.preventDefault();
+      if(!$('#user_terms_of_use').prop('checked') ) {
+        alert('Please accept the terms of use to continue');
+        return false;
+      }
+
       var password_input = $.trim($('#user_password').val());
       var password_confirm_input = $.trim($("#user_password_confirmation").val());
 
@@ -70,6 +79,7 @@
       }
 
       if (msg != '') {
+        alert(msg);
         $('#user_password').closest('.form-group').addClass('has-error');
         $('#user_password').closest('.col-sm-9').find('.help-block').append(msg);
         return false;

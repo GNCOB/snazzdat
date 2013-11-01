@@ -41,14 +41,16 @@
                 %strong= current_user.username
               %span.ellipsis= current_user.name
         %li
-          =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
+          - if current_user.size.nil?
+            =link_to "Size Profile", new_user_size_path(user_id: current_user.id)
+          - else
+            =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
 
       %li.li-footer.text-center
         %div
           =link_to "Terms of Use", terms_path
-          =link_to "Privacy", privacy_path
+          =link_to "Privacy Policy", privacy_path
         %small.text-muted &copy; 2013 SnazzDat Inc.
-  -#.window-footer
-    -unless current_user.nil?
-      %a{href: user_path(current_user.id)}
-        %span.ellipsis= current_user.full_name
+  .window-footer
+    .text-center
+      %small{style:"color: #999"} Powered by Retailigence

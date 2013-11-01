@@ -1,23 +1,24 @@
-=form_tag sessions_path, class: 'form-horizontal' do
+=form_tag sessions_path, class: 'form-horizontal user-form' do
   .form-group
     =label_tag :username, "", class: 'sr-only'
-    .col-sm-9
-      .input-group
+    .col-md-9
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-user
         =text_field_tag :username, params[:email], class: 'form-control', placeholder: 'username'
 
   .form-group
     =label_tag :password, "", class: 'sr-only'
-    .col-sm-9
-      .input-group
+    .col-md-9
+      .input-group.input-group-lg
         %span.input-group-addon
           %i.fa.fa-lock
         =text_field_tag :password, "", type: 'password', class: 'form-control', placeholder: 'password'
 
 
   .row
-    .col-xs-12.col-md-2
-      =submit_tag 'Sign In', class: 'btn btn-primary'
-    .col-xs-12
-      %a{href:sign_up_path} Don't have an account? Sign Up
+    .col-xs-4.col-md-2
+      =submit_tag 'Sign In', class: 'btn btn-primary btn-lg'
+    .col-xs-8.col-md-7
+      .control-label
+        %a{href:sign_up_path} Don't have an account? Sign Up

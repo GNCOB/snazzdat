@@ -15,14 +15,19 @@
 @import "home";
 @import "sizes";
 @import "products";
+@import "user";
 @import "bootstrap-windows.min";
 
 body {
   background: #484747;
   color: #fff;
-  a {
+  a, a:hover, a:active {
     color: #fff;
   }
+}
+footer .navbar {
+  background: #484747;
+  padding-top: 20px;
 }
 .container.window {
   padding-top: 70px;

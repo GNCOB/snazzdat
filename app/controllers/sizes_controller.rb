@@ -8,6 +8,7 @@ class SizesController < ApplicationController
 
   def create
     @size = Size.new(size_params)
+    @size.attributes = {user: current_user.to_pointer}
     if @size.save
       redirect_to root_url
     else

@@ -2,8 +2,8 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Snazzdat"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Snazzdat", :name => "description"}
+      %title= content_for?(:title) ? yield(:title) : "SnazzDat"
+      %meta{:content => content_for?(:description) ? yield(:description) : "SnazzDat", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = javascript_include_tag "application"
         = csrf_meta_tags
@@ -17,7 +17,17 @@
           = render 'layouts/messages'
           = yield
       %footer
-
+        .navbar.navbar-fixed-bottom.hidden-xs.hidden-sm
+          .container
+            .row
+              .col-sm-6
+                .text-left
+                  =link_to "Terms of Use", terms_path
+                  |
+                  =link_to "Privacy Policy", privacy_path
+              .col-sm-6
+                .text-right
+                  &copy; 2013 SnazzDat Inc.
 :javascript
   $(function(){
     var current_location = #{@current_location.nil? ? 'undefined' : @current_location.to_json};
