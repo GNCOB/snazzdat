@@ -6,6 +6,10 @@ Snazzdat::Application.routes.draw do
   get "/login" => "sessions#new", as: :log_in
   get "/logout" => "sessions#destroy", as: :log_out
   get "/signup" => "users#new", as: :sign_up
+  get "/terms" => "static_pages#terms"
+  get "/faqs" => "static_pages#faqs"
+  get "/privacy" => "static_pages#privacy"
+  get "/measure" => "static_pages#measure"
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :sizes
   end

@@ -1,27 +1,37 @@
+.panel.panel-default.size-panel
+  .panel-heading
+    -unless current_user.size.nil?
+      .pull-right
+        =link_to "Edit", edit_user_size_path(user_id: current_user.id, id: current_user.size.id)
+    Size Profile
+  .panel-body
+    -if current_user.size.nil?
+      =link_to "Enter your sizing information", new_user_size_path(user_id: current_user.id)
+    -else
+      .row
+        .col-xs-6 Neck
+        .col-xs-6  =current_user.size.neck
 
-#size-profile.row.clearfix
-  .col-12
-    %h3
-      SIZE PROFILE
-    .size-profile-block
-      .size-profile
-        .pull-right
-          =size.waist
-        Waist
-      .size-profile
-        .pull-right
-          =size.hips
-        Hips
-      .size-profile
-        .pull-right
-          =size.bust
-        Bust
-      .size-profile
-        .pull-right
-          =size.neck
-        Neck
-  .row
-    .col-12.pull-right
-      %a.btn.btn-primary.btn-block{href:edit_user_size_path(:id=>size.id) } Edit
+        .col-xs-6 Chest
+        .col-xs-6 =current_user.size.chest
 
-  =size.as_json
+        .col-xs-6 Sleeve
+        .col-xs-6 =current_user.size.sleeve
+
+        .col-xs-6 Bust
+        .col-xs-6 =current_user.size.bust
+
+        .col-xs-6 Waist
+        .col-xs-6 =current_user.size.waist
+
+        .col-xs-6 Hips
+        .col-xs-6  =current_user.size.hips
+
+        .col-xs-6 Inseam
+        .col-xs-6 =current_user.size.inseam
+
+        .col-xs-6 Height
+        .col-xs-6 =current_user.size.height
+
+        .col-xs-6 Weight
+        .col-xs-6 =current_user.size.weight

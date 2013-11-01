@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/sanarchy7/retailigence.git
-  revision: 90df2a0b3550cca5c70603ff3a801acb0ffcf874
+  revision: 4917acff5b9c2a8a22cf1ab0a01fa20609dadbe3
   specs:
     retailigence (0.1)
       httparty

@@ -1,20 +1,23 @@
 class SearchController < ApplicationController
-  before_action :set_search, only: [:show, :edit, :update, :destroy]
+  before_action :set_search, only: [:show]
 
   # GET /search
   # GET /search.json
   def index
     @products = []
     if params[:search]
-
+      if current_user.nil?
+        requester_id = request.uuid
+      else
+        requester_id = current_user.username
+      end
       search_terms = {
           format:'json',
           userlocation: "#{get_location[:lat]}, #{get_location[:lng]}" ,
           Keywords: params[:search],
           Page: '1',
-          pageSize: '50',
-          requestorid:'13cda9a1dc2c69e5',
-          apikey: Retailigence::API_KEY,
+          pageSize: '100',
+          requestorid:requester_id,
           range: '10',
           rcategory: 'Apparel'
 
@@ -43,49 +46,9 @@ class SearchController < ApplicationController
     @search = Search.new
   end
 
-  # GET /search/1/edit
-  def edit
-  end
 
-  # POST /search
-  # POST /search.json
-  def create
-    @search = Search.new(search_params)
 
-    respond_to do |format|
-      if @search.save
-        format.html { redirect_to @search, notice: 'Search was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @search }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @search.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
-  # PATCH/PUT /search/1
-  # PATCH/PUT /search/1.json
-  def update
-    respond_to do |format|
-      if @search.update(search_params)
-        format.html { redirect_to @search, notice: 'Search was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @search.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /search/1
-  # DELETE /search/1.json
-  def destroy
-    @search.destroy
-    respond_to do |format|
-      format.html { redirect_to searches_url }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

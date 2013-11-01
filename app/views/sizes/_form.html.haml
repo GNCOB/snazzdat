@@ -56,7 +56,7 @@
           =f.input_field :weight, maxLength: 3, type: 'tel'
           %small
             %em lbs
-      .form-group
+      -#.form-group
         =f.label :body_shape, class: 'col-sm-3 control-label'
         .col-sm-4
           =f.select :body_shape_code, collection: BodyShapeConstants::ALL.map{|k| [k[:name], k[:code]]}

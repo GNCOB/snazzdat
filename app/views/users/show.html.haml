@@ -14,16 +14,3 @@
     %p
       %strong Email:
       =@user.email
-
-
-.panel.panel-default
-  .panel-heading
-    -unless @user.size.nil?
-      .pull-right
-        =link_to "Edit", edit_user_size_path(user_id: current_user.id, id: @user.size.id)
-    Size Profile
-  .panel-body
-    -if @user.size.nil?
-      =link_to "Enter your sizing information", new_user_size_path(user_id: current_user.id)
-    -else
-      =@user.size.neck

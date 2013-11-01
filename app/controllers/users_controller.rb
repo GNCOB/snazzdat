@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @has_error = false
   end
 
   def create
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
 
     rescue  => e
       Rails.logger.debug "User create ERROR: #{e.message}"
+      flash[:notice] = e.message
       render action: :new
     end
 

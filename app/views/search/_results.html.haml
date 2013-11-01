@@ -35,6 +35,7 @@
             .col-sm-6
               .location
                 %strong Store Information
+
                 .name
                   =product['location']['name']
                 .address
@@ -44,3 +45,7 @@
                   ,
                   =product['location']['address']['state']
                   =product['location']['address']['postal']
+                %small
+                  %em
+                    Phone:
+                    =product['location']['phone']

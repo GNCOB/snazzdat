@@ -20,3 +20,4 @@ $(document).on('click', '#js-product-search-button', function(){
         $(".search-container .form-control").focus();
     }, 100);
 });
+
