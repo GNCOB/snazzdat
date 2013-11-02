@@ -10,6 +10,7 @@ Snazzdat::Application.routes.draw do
   get "/faqs" => "static_pages#faqs"
   get "/privacy" => "static_pages#privacy"
   get "/measure" => "static_pages#measure"
+  get "/about_us" => "static_pages#about_us"
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :sizes
   end
