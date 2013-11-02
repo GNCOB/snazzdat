@@ -50,15 +50,22 @@
         =@user.errors[:password_confirmation].first
 
   .checkbox
-    =f.input :terms_of_use, as: :boolean, inline_label: "I Agree to the Terms of Use", label: false
+    .row
+      .col-xs-12.col-sm-6
+        =f.input :terms_of_use, as: :boolean, inline_label: "I Agree to the Terms of Use and Privacy Policy", label: false
+      -#.col-xs-12.col-sm-6
+        =link_to "Terms Of Use", terms_path, target: "_blank"
+        ,
+        =link_to "Privacy Privacy Policy", privacy_path, target: "_blank"
+        %br/
+        %br/
 
-
-  .form-group
-    .col-sm-9
+  .row
+    .col-xs-4.col-md-2
       =f.button :submit, 'Sign Up', class: 'btn btn-primary btn-lg'
-
-%a{href:log_in_path} Have an account? Sign In
-
+    .col-xs-6.col-sm-7
+      .control-label
+        %a{href:log_in_path} Have an account? Sign In
 
 :javascript
   $('.new-user-form').on('submit', function(e){
