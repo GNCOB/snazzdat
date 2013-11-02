@@ -28,6 +28,11 @@ body {
 footer .navbar {
   background: #484747;
   padding-top: 20px;
+
+  a {
+    display: inline-block;
+    margin: 0 10px;
+  }
 }
 .container.window {
   padding-top: 70px;
