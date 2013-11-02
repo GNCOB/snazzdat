@@ -5,7 +5,7 @@
         .col-xs-6.product
           .product-image
             -if !product['product']['images'].blank?
-              =image_tag(product['product']['images'][1]['ImageInfo']['link'], {class: 'img-responsive'})
+              =image_tag(product['product']['images'][0]['ImageInfo']['link'], {class: 'img-responsive'})
             -else
               Image coming soon
           .description

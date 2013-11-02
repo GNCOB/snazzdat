@@ -54,16 +54,27 @@ footer .navbar {
     color: #fff;
   }
 }
-#phone-nav button {
-  background: none;
-  color: #fff;
-  border: none;
-  outline: none;
+#phone-nav {
+  #js-product-search-button {
+    position: absolute;
+    left: auto;
+    right: 5%;
+    margin: 6px 0 10px 0;
+  }
+  button {
+    background: none;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
 }
 
 .search-container {
   margin-top: 15px;
   display: none;
+ &.desktop {
+   margin-top: 80px;
+ }
 }
 
 #navi-avatar {
@@ -96,12 +107,4 @@ footer .navbar {
     }
   }
 }
-
- #js-product-search-button {
-   position: absolute;
-   left: auto;
-   right: 5%;
-   margin: 6px 0 10px 0;
- }
-
 /*** End Profile Image  ***/

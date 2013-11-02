@@ -1,5 +1,4 @@
 class SearchController < ApplicationController
-  before_action :set_search, only: [:show]
 
   # GET /search
   # GET /search.json
@@ -28,36 +27,14 @@ class SearchController < ApplicationController
       puts '#######'
       puts results
       puts '######'
-      results['RetailigenceSearchResult']['results'].each do |r|
-        @products << r['SearchResult']
+
+      unless results['RetailigenceSearchResult']['results'].nil?
+        results['RetailigenceSearchResult']['results'].each do |r|
+          @products << r['SearchResult']
+        end
       end
 
 
     end
   end
-
-  # GET /search/1
-  # GET /search/1.json
-  def show
-  end
-
-  # GET /search/new
-  def new
-    @search = Search.new
-  end
-
-
-
-
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_search
-      @search = Search.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def search_params
-      params[:search]
-    end
 end

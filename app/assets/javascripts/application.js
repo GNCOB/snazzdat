@@ -15,6 +15,12 @@
 //= require_tree .
 
 $(document).on('click', '#js-product-search-button', function(){
+    if ($(this).data('nav') == 'desktop') {
+        $('.search-container').addClass('desktop');
+    } else {
+        $('.search-container').removeClass('desktop');
+    }
+
     $('.search-container').toggle(400, 'linear');
     setTimeout(function(){
         $(".search-container .form-control").focus();
