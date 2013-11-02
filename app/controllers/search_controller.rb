@@ -4,7 +4,7 @@ class SearchController < ApplicationController
   # GET /search.json
   def index
     @products = []
-    if params[:search]
+    if params[:search] && !get_location.nil?
       if current_user.nil?
         requester_id = request.uuid
       else
