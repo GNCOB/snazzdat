@@ -2,6 +2,10 @@ development:
   app_id: oxvU7BRJzsuOeXusB4wnWU7t3YZrWTFxJ2N5fj9g
   master_key: lDMdjBX9er12nbFvC4oYP3ydfbFZXGw53fMdi7Yh
 
+staging:
+  app_id: oxvU7BRJzsuOeXusB4wnWU7t3YZrWTFxJ2N5fj9g
+  master_key: lDMdjBX9er12nbFvC4oYP3ydfbFZXGw53fMdi7Yh
+
 test:
   app_id: 1234567890
   master_key: abcdefgh
