@@ -15,9 +15,10 @@ Snazzdat::Application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :sizes
   end
-  resources :sessions
+  resources :sessions, only: [:new, :create, :destroy] do
+    get :password_reset_form, on: :collection
+    post :password_reset, on: :collection
+  end
   resources :search, only: [:index]
   resources :partners
-
-
 end

@@ -6,6 +6,8 @@
         %span.input-group-addon
           %i.fa.fa-user
         =text_field_tag :username, params[:email], class: 'form-control', placeholder: 'username'
+      .help-block{style: 'color:#fff'}
+        %span username is case sensitive
 
   .form-group
     =label_tag :password, "", class: 'sr-only'
@@ -16,9 +18,12 @@
         =text_field_tag :password, "", type: 'password', class: 'form-control', placeholder: 'password'
 
 
-  .row
+  .form-group
     .col-xs-4.col-md-2
       =submit_tag 'Sign In', class: 'btn btn-primary btn-lg'
+  .row
     .col-xs-8.col-md-7
-      .control-label
-        %a{href:sign_up_path} Don't have an account? Sign Up
+      %div
+        =link_to "Don't have an account? Sign Up", sign_up_path
+      %div
+        =link_to "Forgot Username/Password?", password_reset_form_sessions_path

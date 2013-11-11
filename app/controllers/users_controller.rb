@@ -43,6 +43,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def reset_password
+
+  end
+
   private
 
   def set_user
