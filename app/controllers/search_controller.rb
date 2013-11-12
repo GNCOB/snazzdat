@@ -16,7 +16,7 @@ class SearchController < ApplicationController
           Keywords: params[:search],
           Page: '1',
           pageSize: '100',
-          requestorid:requester_id,
+          requestorid: requester_id,
           range: '30',
           rcategory: 'Apparel'
       }

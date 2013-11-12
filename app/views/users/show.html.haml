@@ -2,7 +2,7 @@
 .panel.panel-default
   .panel-heading
     .pull-right
-      =link_to "Edit", '#'
+      =link_to "Edit", edit_user_path, class: 'btn-link'
     Account Information
   .panel-body
     %p
@@ -11,6 +11,9 @@
     %p
       %strong Full Name:
       =@user.name
+    %p
+      %strong Gender:
+      =@user.gender
     %p
       %strong Email:
       =@user.email

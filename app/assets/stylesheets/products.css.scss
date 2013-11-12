@@ -10,15 +10,15 @@
 
 
   .description {
-    text-overflow: ellipsis;
+    /*text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap;*/
     .name {
       padding: 10px 0;
       text-align: center;
-      text-overflow: ellipsis;
+      /*text-overflow: ellipsis;
       white-space: nowrap;
-      overflow: hidden;
+      overflow: hidden;*/
     }
     .description-item {
       border-bottom: solid 1px #ccc;
