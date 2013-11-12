@@ -17,10 +17,8 @@ class SearchController < ApplicationController
           Page: '1',
           pageSize: '100',
           requestorid:requester_id,
-          range: '10',
+          range: '30',
           rcategory: 'Apparel'
-
-
       }
       product_search =  Retailigence::Product.new
       results = product_search.search search_terms
