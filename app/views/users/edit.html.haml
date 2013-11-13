@@ -1,5 +1,5 @@
-%h3 Edit Account Information
+%h3 Edit User Profile
 =simple_form_for @user do |f|
   =f.input :name,  input_html: {class: 'input-lg' }
-  =f.input :gender, collection: %w(Male Female), prompt: 'Select your gender'
+  =f.input :gender, collection: %w(Male Female), prompt: 'Select gender'
   =f.submit "Save", class: 'btn btn-default btn-primary btn-lg', data: {disable_with: "Saving..."}

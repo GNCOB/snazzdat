@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit]
-  before_action :authenticate_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :my_matches]
+  before_action :authenticate_user, only: [:edit, :update, :my_matches]
 
 
   def show
@@ -43,10 +43,63 @@ class UsersController < ApplicationController
     end
   end
 
-  def reset_password
+  def my_matches
+    @matches = nil
+
+    unless @user.gender.blank?
+      @matches =  Rails.cache.fetch("my-matches-#{current_user.id}", expires_in: 1.hour) do
+        puts "CACHE HIT"
+        matches_array = []
+        if @user.gender == "Male"
+          MyMatchesConstants::MEN.each do |match|
+            keywords =  "Men's " + match
+            search_attrs = {
+                format:'json',
+                userlocation: "#{get_location[:lat]}, #{get_location[:lng]}" ,
+                Keywords: keywords,
+                Page: '1',
+                pageSize: '5',
+                requestorid: @user.username,
+                range: '30',
+                rcategory: 'Apparel'
+            }
+
+            product_search =  Retailigence::Product.new
+            results = product_search.search search_attrs
+
+            unless results['RetailigenceSearchResult']['results'].nil?
+              matches_array  << results['RetailigenceSearchResult']['results'].first['SearchResult']
+            end
+          end
+
+        else
+          MyMatchesConstants::WOMEN.each do |match|
+            keywords =  "Women's " + match
+            search_attrs = {
+                format:'json',
+                userlocation: "#{get_location[:lat]}, #{get_location[:lng]}" ,
+                Keywords: keywords,
+                Page: '1',
+                pageSize: '5',
+                requestorid: @user.username,
+                range: '30',
+                rcategory: 'Apparel'
+            }
+
+            product_search =  Retailigence::Product.new
+            results = product_search.search search_attrs
+
+            unless results['RetailigenceSearchResult']['results'].nil?
+              matches_array  << results['RetailigenceSearchResult']['results'].first['SearchResult']
+            end
+          end
+        end
+        matches_array
+      end
+    end
+
 
   end
-
   private
 
   def set_user
@@ -54,7 +107,9 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :name, :password)
+    params.require(:user).permit(:username, :email, :name, :password, :gender)
   end
+
+
 
 end
