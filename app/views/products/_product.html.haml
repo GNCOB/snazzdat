@@ -15,12 +15,11 @@
           =product['product']['brand']
       .price
         Price:
-        -if !product['product']['msrpCurrency'].blank?
-          $
-        -if product['product']['msrp']
-          ="--"
+        -if product['price'].blank?
+          See store for details
         -else
-          =product['product']['msrp']
+          $
+          =product['price']
 
       .size.description-item
         - if !product['product']['size'].blank?
