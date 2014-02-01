@@ -31,7 +31,9 @@
                   =link_to "How To Use", how_to_use_path
               .col-sm-6
                 .text-right
-                  &copy; 2013 SnazzDat Inc.
+                  &copy;
+                  =Time.now.year
+                  SnazzDat Inc.
 :javascript
   $(function(){
     var current_location = #{@current_location.nil? ? 'undefined' : @current_location.to_json};
