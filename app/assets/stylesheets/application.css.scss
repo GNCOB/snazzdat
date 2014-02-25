@@ -16,13 +16,14 @@
 @import "sizes";
 @import "products";
 @import "user";
-@import "bootstrap-windows.min";
+@import "jasny-bootstrap.min";
 
 body {
-  background: #484747;
-  color: #fff;
+  background: #fff;
+  padding-top: 125px;
+  color: #999;
   a, a:hover, a:active {
-    color: #fff;
+    color: #8e44ad;
   }
 }
 footer .navbar {
@@ -34,14 +35,7 @@ footer .navbar {
     margin: 0 10px;
   }
 }
-.container.window {
-  padding-top: 70px;
-  padding-bottom: 100px;
-}
 
-.weight-lighter {
-  font-weight: lighter;
-}
 .content {
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
@@ -51,36 +45,38 @@ footer .navbar {
 
 /****Begin Navigation******/
 
-#phone-nav, #desktop-nav {
+.navbar {
   background: #8e44ad;
   border: none;
   color: #fff;
   a, a:hover {
     color: #fff;
   }
-}
-#phone-nav {
-  #js-product-search-button {
-    position: absolute;
-    left: auto;
-    right: 5%;
-    margin: 6px 0 10px 0;
+
+  #off-canvas-toggle {
+    display: inline-block;
+    padding: 0;
+    margin: 15px 0 0 15px;
   }
-  button {
-    background: none;
-    color: #fff;
-    border: none;
-    outline: none;
+
+  #nav-brand {
+    display: inline-block;
+    padding: 0;
+    margin: 15px 0 0 15px;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: lighter;
+    letter-spacing: 12px;
+    text-decoration: none;
   }
+
+  .navbar-form {
+    box-shadow: none;
+  }
+
 }
 
-.search-container {
-  margin-top: 15px;
-  display: none;
- &.desktop {
-   margin-top: 80px;
- }
-}
+
 
 #navi-avatar {
   color: #fff;
@@ -93,6 +89,20 @@ footer .navbar {
   }
   a {
     color: #fff;
+  }
+}
+
+#user-sign-up {
+  margin-top: 20px;
+  a {
+
+  }
+}
+
+#main-search-bar {
+  .visible-xs .navbar-form {
+    border: none;
+    margin: 0;
   }
 }
 

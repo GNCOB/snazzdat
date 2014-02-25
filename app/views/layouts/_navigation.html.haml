@@ -1,67 +1,70 @@
-#desktop-nav.navbar.navbar-default.navbar-fixed-top.hidden-xs.hidden-sm
-  .contain
-    .navbar-header
-      %a.navbar-brand{href: root_path} SnazzDat
+.navmenu.navmenu-default.navmenu-fixed-left.offcanvas.hidden-print{"aria-hidden" => "true"}
+  - if current_user.nil?
+    #user-sign-up.row
+      .col-xs-1 &nbsp;
+      .col-xs-5
+        =link_to "Sign In", log_in_path, class: 'btn btn-default btn-lg btn-block'
+      .col-xs-5
+        =link_to "Sign Up", sign_up_path, class: 'btn btn-default btn-lg btn-block'
+  - else
+    %li
+      %a{href: log_out_path} Sign Out
 
-    %ul.nav.navbar-nav.navbar-right
-      - if current_user.nil?
-        %li
-          %a{href: log_in_path} Sign In
-        %li
-          %a{href: sign_up_path} Sign Up
+    %li#navi-avatar.clearfix
+      %a{href: user_path(current_user.id)}
+        .pull-left
+          %i.fa.fa-user.fa-3x
+        .pull-left
+          .text-ellipsis
+            %strong= current_user.username
+          %span.ellipsis= current_user.name
+    %li
+      - if current_user.size.nil?
+        =link_to "Size Profile", new_user_size_path(user_id: current_user.id)
       - else
-        %li
-          %a{href: log_out_path} Sign Out
+        =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
+    %li
+      =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
 
-      %li
-        %a#js-product-search-button{href: '#', data:{nav: 'desktop'}}
-          %i.fa.fa-2x.fa-search
+  %ul.nav.nav-stacked
+    %li
+      =link_to "About Us", about_us_path
+    %li
+      =link_to "Terms of Use", terms_path
+    %li
+      =link_to "FAQs", faqs_path
+    %li
+      =link_to "Privacy Policy", privacy_path
+    %li
+      =link_to "How to Measure", measure_path
+    %li
+      =link_to "How To Use", how_to_use_path
 
-#phone-nav.navbar.navbar-default.window.window-center.window-left-slide.window-right-slide.navbar-fixed-top.visible-xs.visible-sm.hidden-print{role: "navigation"}
-  .navbar-inner
-    .container
-      %a.navbar-brand{href: root_path}
-        SnazzDat
-      %button.btn.btn-default.btn-left{"data-target" => "#navi-left", "data-toggle" => "window", type: "button"}
+  %hr/
+
+  .text-center
+    %div
+      %small.text-muted
+        &copy;
+        =Time.now.year
+        SnazzDat Inc.
+    %div
+      %small{style:"color: #999"} Powered by Retailigence
+
+.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+  .container-fluid
+    .navbar-header
+
+      %a#off-canvas-toggle{href: '#', data:{toggle: 'offcanvas', target: '.navmenu', canvas: 'body'}}
         %i.fa.fa-2x.fa-align-justify
 
-      %a#js-product-search-button{href: '#', data:{nav: 'phone'}}
-        %i.fa.fa-2x.fa-search
-
-.container.search-container
-  = render 'search/form'
-
-#navi-left.window.window-left.window-invert.visible-xs.visible-sm.hidden-print{"aria-hidden" => "true"}
-  .contain
-    %ul.nav.nav-stacked.nav-striped
-
-      -unless current_user.nil?
-        %li#navi-avatar.clearfix
-          %a{href: user_path(current_user.id)}
-            .pull-left
-              %i.fa.fa-user.fa-3x
-            .pull-left
-              .text-ellipsis
-                %strong= current_user.username
-              %span.ellipsis= current_user.name
-        %li
-          - if current_user.size.nil?
-            =link_to "Size Profile", new_user_size_path(user_id: current_user.id)
-          - else
-            =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
-        %li
-          =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
-
-      %li.li-footer
-        %div
-          =link_to "About Us", about_us_path
-          =link_to "Terms of Use", terms_path
-          =link_to "FAQs", faqs_path
-          %br/
-          =link_to "Privacy Policy", privacy_path
-          =link_to "How to Measure", measure_path
-          =link_to "How To Use", how_to_use_path
-        %small.text-muted &copy; 2013 SnazzDat Inc.
-  .window-footer
-    .text-center
-      %small{style:"color: #999"} Powered by Retailigence
+      %a#nav-brand{href: root_path} SnazzDat
+    #main-search-bar
+      .hidden-xs
+        = form_tag search_index_path, method: :get, class: 'navbar-form', role: 'search' do
+          .form-group
+            =text_field_tag :search, params[:search], :class=>'form-control', placeholder: 'search apparel'
+      .visible-xs
+        = form_tag search_index_path, method: :get, class: 'navbar-form', role: 'search' do
+          .form-group
+            =text_field_tag :search, params[:search], :class=>'form-control', placeholder: 'search apparel'
