@@ -1,0 +1,29 @@
+%h1 Listing partners
+
+%table
+  %tr
+    %th Sender
+    %th Receiver
+    %th City
+    %th Zip Code
+    %th Email
+    %th Date
+    %th
+    %th
+    %th
+
+  - @appointments.each do |a|
+    %tr
+      %td= a.user
+      %td= a.receiver
+      %td= a.city
+      %td= a.zip_code
+      %td= a.email
+      %td= a.date
+      %td= link_to 'Show', a
+      %td= link_to 'Edit', edit_appointment_path(a)
+      %td= link_to 'Destroy', a, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  end
+%br
+
+= link_to 'New Appointment', new_appointment_path
