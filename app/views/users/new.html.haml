@@ -61,11 +61,11 @@
         %br/
 
   .row
-    .col-xs-4.col-md-2
-      =f.button :submit, 'Sign Up', class: 'btn btn-primary btn-lg'
-    .col-xs-6.col-sm-7
+    .col-xs-12.col-sm-5
+      =f.button :submit, 'Sign Up', class: 'btn btn-primary btn-lg btn-block'
+    .col-xs-12.col-sm-7
       .control-label
-        %a{href:log_in_path} Have an account? Sign In
+        %a{href:log_in_path, class: 'btn-link'} Have an account? Sign In
 
 :javascript
   $('.new-user-form').on('submit', function(e){
