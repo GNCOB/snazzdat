@@ -4,10 +4,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:username], params[:password])
+    if params[:facebook] == 'login'
+      user = User.authenticate_with_facebook(params[:user_id], params[:access_token], params[:expires])
+    else
+      user = User.authenticate(params[:username], params[:password])
+    end
     if user
       session[:user_id] = user.id
-      redirect_to root_url, notice: "Logged In"
+      redirect_to root_url({facebook: params[:facebook] == 'login'}), notice: "Logged In"
     else
       flash[:error] = "Invalid email or password"
       render action: :new
