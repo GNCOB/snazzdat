@@ -2,7 +2,7 @@
 :javascript
   window.fbAsyncInit = function() {
     Parse.FacebookUtils.init({
-      appId      : '732984516719860',
+      appId      : "#{LibConstants::FACEBOOK_APP_ID}",
       status     : false, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : false  // parse XFBML
@@ -16,9 +16,9 @@
           // The response object is returned with a status field that lets the app know the current
           // login status of the person. In this case, we're handling the situation where they
           // have logged in to the app.
-          FB.api('/me', function(response) {
+          /*FB.api('/me', function(response) {
                 console.log('Good to see you, ' + response.name + '.');
-          });
+          });*/
 
         } else if (response.status === 'not_authorized') {
           // In this case, the person is logged into Facebook, but not into the app, so we call
@@ -39,15 +39,6 @@
         }
       });
 
-
-    //FB.getLoginStatus(function(response) {
-    //      console.log(response.status);
-    //      if (response.status === 'connected') {
-    //        // user logged in and linked to app
-    //        // handle this case HERE
-    //      }
-    //   });
-
   };
 
     // Load the SDK asynchronously
@@ -64,20 +55,36 @@
         Parse.FacebookUtils.logIn(null, {
             success: function(user) {
               var fbData = user.attributes.authData.facebook;
-              $.ajax({
-                type: 'POST',
-                url: "#{sessions_path}",
-                data: {
-                  facebook: 'login',
-                  user_id: fbData.id+"",
-                  access_token: fbData.access_token+"",
-                  expires: fbData.expiration_date+""
+              FB.api('/me', function(response) {
+              var gender = response.gender[0].toUpperCase()+response.gender.slice(1);
+                Parse.User.current().save({
+                  name: response.name,
+                  gender: gender
                 },
-                success: function(){
-                  window.location.reload();
-                }
+                {
+                  success: function(successResponse) {
+                    $.ajax({
+                      type: 'POST',
+                      url: "#{sessions_path}",
+                      data: {
+                        facebook: 'login',
+                        user_id: fbData.id+"",
+                        access_token: fbData.access_token+"",
+                        expires: fbData.expiration_date+""
+                      },
+                      success: function(){
+                        window.location.reload();
+                      }
 
+                    });
 
+                  },
+                  error: function(errorResponse, error) {
+                      console.log("ERROR");
+                      console.log(errorResponse);
+                      console.log(error);
+                  }
+                });
               });
 
               if (!user.existed()) {

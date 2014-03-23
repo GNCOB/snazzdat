@@ -10,30 +10,31 @@
     .row
       .col-xs-1 &nbsp;
       .col-xs-10
-        =link_to "Login with Facebook", '#', onclick: 'FBLogin();', class: 'btn btn-default btn-lg btn-block'
+        =link_to '#', onclick: 'FBLogin();', class: 'btn btn-primary btn-lg btn-block' do
+          %i.fa.fa-facebook
+          Login with Facebook
       .col-xs-1 &nbsp;
 
   - else
-    %li
-      %a{href: log_out_path} Sign Out
+    %p#navi-avatar
+      Signed in as:
+      =link_to user_path(current_user.id) do
+        %span.ellipsis= current_user.name
 
-    %li#navi-avatar.clearfix
-      %a{href: user_path(current_user.id)}
-        .pull-left
-          %i.fa.fa-user.fa-3x
-        .pull-left
-          .text-ellipsis
-            %strong= current_user.username
-          %span.ellipsis= current_user.name
-    %li
-      - if current_user.size.nil?
-        =link_to "Size Profile", new_user_size_path(user_id: current_user.id)
-      - else
-        =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
-    %li
-      =link_to "Appointments", new_appointment_path(user_id: current_user.id)
-    %li
-      =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
+    %ul.nav.nav-stacked
+      %li
+        =link_to "My Account", user_path(current_user.id)
+      %li
+        - if current_user.size.nil?
+          =link_to "Size Profile", new_user_size_path(user_id: current_user.id)
+        - else
+          =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
+      %li
+        =link_to "Appointments", new_appointment_path(user_id: current_user.id)
+      %li
+        =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
+
+  %hr/
 
   %ul.nav.nav-stacked
     %li
@@ -50,6 +51,10 @@
       =link_to "How To Use", how_to_use_path
 
   %hr/
+
+  -unless current_user.nil?
+    %p.text-center=link_to "Sign Out", log_out_path, class: 'btn btn-default'
+
 
   .text-center
     %div
@@ -68,9 +73,10 @@
         %i.fa.fa-2x.fa-align-justify
 
       %a#nav-brand{href: root_path} SnazzDat
+      %sup beta
     #main-search-bar
       .hidden-xs
-        = form_tag search_index_path, method: :get, class: 'navbar-form', role: 'search' do
+        = form_tag search_index_path, method: :get, class: 'navbar-form navbar-left', role: 'search' do
           .form-group
             =text_field_tag :search, params[:search], :class=>'form-control', placeholder: 'search apparel'
       .visible-xs

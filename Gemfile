@@ -23,6 +23,7 @@ gem 'retailigence', :git => "https://github.com/sanarchy7/retailigence.git"
 #gem 'geokit-rails'
 gem "kaminari" # optional for pagination support
 gem "parse_resource", :git => "https://github.com/sanarchy7/parse_resource.git"
+gem 'valid_email'
 
 group :development do
   gem 'better_errors'
