@@ -19,6 +19,11 @@
         %strong Email:
         =@user.email
 
+    - unless @user.phone.blank?
+      %p
+        %strong Phone:
+        =number_to_phone @user.phone
+
     - unless @user.address1.blank?
       %p
         %strong Address:

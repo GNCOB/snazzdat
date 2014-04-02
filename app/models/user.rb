@@ -7,7 +7,7 @@ class User < ParseUser
   validate :confirm_password
   validates :email, presence: true, email: true
 
-  fields :email, :name, :gender, :terms_of_use, :password_confirmation, :address1, :address2, :city, :state, :zip_code
+  fields :email, :name, :gender, :terms_of_use, :password_confirmation, :address1, :address2, :city, :state, :zip_code, :phone
 
   def size
     Size.where(user: self.to_pointer).first
