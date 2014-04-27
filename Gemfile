@@ -19,11 +19,12 @@ gem 'font-awesome-rails'
 gem 'rails_12factor'
 gem 'retailigence', :git => "https://github.com/sanarchy7/retailigence.git"
 #gem 'retailigence', :path => '../retailigence'
-#gem 'geokit'
+gem 'geokit'
 #gem 'geokit-rails'
 gem "kaminari" # optional for pagination support
 gem "parse_resource", :git => "https://github.com/sanarchy7/parse_resource.git"
 gem 'valid_email'
+gem 'active_rest_client'
 
 group :development do
   gem 'better_errors'
