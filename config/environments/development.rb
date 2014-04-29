@@ -28,4 +28,14 @@ Snazzdat::Application.configure do
   config.assets.debug = true  # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :authentication => :plain,
+      :address => "smtp.mailgun.org",
+      :port => 587,
+      :domain => "sandbox9c277581c32249cbb851b48bc044e43c.mailgun.org",
+      :user_name => "postmaster@sandbox9c277581c32249cbb851b48bc044e43c.mailgun.org",
+      :password => "2mglk31r1lx4"
+  }
+
 end

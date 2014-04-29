@@ -11,6 +11,7 @@ class AppointmentsController < ApplicationController
     @appointment.attributes = {user: current_user.to_pointer}
     # setting more attributes, then saving
     if @appointment.save
+      AppointmentsMailer.new_appointment_notification(@appointment).deliver
       redirect_to action: :index
     else
       render action: :new
