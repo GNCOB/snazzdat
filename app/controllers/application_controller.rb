@@ -2,18 +2,29 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  #before_action :get_location
+  prepend_before_action :set_location
   helper_method :current_user
   helper_method :get_location
 
   def set_location
-    if !params[:lat].blank? && !params[:lng].blank?
-      zip = '20001'
-
-
-      session[:current_location] =  {lat:params[:lat], lng: params[:lng], zip_code: zip }
+    if cookies[CookieConstants::USER_LOCATION].blank?
+      res = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip)
+      if res.success
+        cookies[CookieConstants::USER_LOCATION] = {value: {lat:res.lat, lng: res.lng}.to_json }
+      else
+        cookies[CookieConstants::USER_LOCATION] = {value: {lat:"38.8951", lng: "-77.0367"}.to_json } # Default to DC area
+      end
     end
-    head :no_content
+    #head :no_content
+
+=begin
+    if !params[:lat].blank? && !params[:lng].blank? && cookies[CookieConstants::USER_LOCATION].blank?
+      res = Geokit::Geocoders::GoogleGeocoder.reverse_geocode("#{params[:lat]}, #{params[:lng]}")
+      if res.success
+        cookies[CookieConstants::USER_LOCATION] = {value: res.zip}
+      end
+    end
+=end
   end
 
   private
@@ -27,7 +38,10 @@ class ApplicationController < ActionController::Base
   end
 
   def get_location
-    @current_location ||= session[:current_location]
+    if cookies[CookieConstants::USER_LOCATION].blank?
+      set_location
+    end
+    ActiveSupport::JSON.decode cookies[CookieConstants::USER_LOCATION]
   end
 
 end

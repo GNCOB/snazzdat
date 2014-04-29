@@ -7,7 +7,8 @@ error = (msg) ->
   s.html(typeof msg == 'string' ? msg : "failed")
 
 window.getUserLocation = ->
-  if navigator.geolocation
+  ###if navigator.geolocation
     navigator.geolocation.getCurrentPosition(success, error)
   else
-    error 'not supported'
+    error 'not supported'###
+  null

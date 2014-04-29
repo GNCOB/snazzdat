@@ -14,4 +14,14 @@ module LibConstants
     FACEBOOK_APP_ID = '263789127131811'
   end
 
+  RETAILIGENCE_REQUEST_ID = 'ab09b07155a1aa0a21a3701eebb6c3fc'
+
+  if Rails.env.production?
+    RETAILIGENCE_API_KEY = '9ueu6I9fHzu-jXzNzTt2toBXBVBBstxr'
+    RETAILIGENCE_BASE_URI = 'http://api.retailigence.com/v2.1'
+  else
+    RETAILIGENCE_API_KEY = 'aIzdHVPfx5e20bav-Lx7xtdP7MK7usst'
+    RETAILIGENCE_BASE_URI = 'http://apitest.retailigence.com/v2.1'
+  end
+
 end

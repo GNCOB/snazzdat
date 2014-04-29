@@ -1,8 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-    puts '########'
-    puts current_user.inspect
-    puts '######'
+    @r = Retailer.all(userlocation: "#{get_location['lat']}, #{get_location['lng']}")
   end
 end
