@@ -1,10 +1,13 @@
 class PartnersController < ApplicationController
-  before_action :set_partner, only: [:show, :edit, :update, :destroy]
+  before_action only: [:show, :edit, :update, :destroy]
 
   # GET /partners
   # GET /partners.json
   def index
-    @partners = Partner.all
+#    @partners = Partner.all
+    @r = Retailer.all(userlocation: "#{get_location['lat']}, #{get_location['lng']}")
+    @r.each { @partner_params = {'name' => @r.name} }
+
   end
 
   # GET /partners/1
@@ -15,39 +18,35 @@ class PartnersController < ApplicationController
   # GET /partners/new
   def new
     @partner = Partner.new
+    @partner.attributes = {user: current_user.to_pointer}
+    @has_error = false
   end
 
   # GET /partners/1/edit
   def edit
+    set_partner
   end
 
   # POST /partners
   # POST /partners.json
   def create
-    @partner = Partner.new(partner_params)
-
-    respond_to do |format|
-      if @partner.save
-        format.html { redirect_to @partner, notice: 'Partner was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @partner }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @partner.errors, status: :unprocessable_entity }
-      end
+    @partner = Partner.new(params[:id])
+    @partner.update_attributes(partner_params)
+    if @partner.save
+      redirect_to action: :index
+    else
+      render action: :new
     end
   end
 
   # PATCH/PUT /partners/1
   # PATCH/PUT /partners/1.json
   def update
-    respond_to do |format|
-      if @partner.update(partner_params)
-        format.html { redirect_to @partner, notice: 'Partner was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @partner.errors, status: :unprocessable_entity }
-      end
+    @partner = Partner.find(params[:id])
+    if @partner.update(partner_params)
+      redirect_to @partner, notice: 'Partner was successfully updated.'
+    else
+      render action: :edit
     end
   end
 
@@ -69,6 +68,6 @@ class PartnersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def partner_params
-    params.require(:partner).permit(:name, :address, :email, :phone)
+    params.require(:partner).permit(:name, :address, :email, :phone, :user)
   end
 end

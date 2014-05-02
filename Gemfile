@@ -11,8 +11,8 @@ gem 'jbuilder', '~> 1.2'
 #gem 'bootstrap-sass'
 #gem 'devise'
 gem 'haml-rails'
-gem 'pg', '~> 0.16.0'
-#gem 'sqlite3'
+#gem 'pg', '~> 0.16.0'
+gem 'sqlite3'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'bourbon'
 gem 'font-awesome-rails'
@@ -29,6 +29,6 @@ gem 'active_rest_client'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'hub', :require=>nil
+  gem 'hub', :require => nil
   gem 'quiet_assets'
 end

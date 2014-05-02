@@ -3,11 +3,15 @@ class AppointmentsController < ApplicationController
 
   def new
     @appointment = Appointment.new
+    @appointment.attributes = {user: current_user.to_pointer}
+    #test data
+    @appointment.attributes = {receiver: 'Dg5GjRJeSV'}
     @has_error = false
   end
 
   def create
-    @appointment = Appointment.new(appointment_params)
+    @appointment = Appointment.new(params[:id])
+    @appointment.update_attributes(appointment_params)
     @appointment.attributes = {user: current_user.to_pointer}
     # setting more attributes, then saving
     if @appointment.save
@@ -19,33 +23,39 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-
+    set_appointment
   end
 
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.where(:user => current_user.to_pointer)
   end
 
   def edit
-
+    set_appointment
   end
 
   def update
-    if @appointment.update(@appointment_params)
+    @appointment = Appointment.find(params[:id])
+    if @appointment.update(appointment_params)
+      redirect_to action: :show
       flash[:notice] = "Appointment Updated."
     else
+      render action: :edit
     end
-    render action: :edit
+  end
+
+  def destroy
+    @appointment.destroy
+    respond_to do |format|
+      format.html { redirect_to appointments_url_url }
+      format.json { head :no_content }
+    end
   end
 
   private
 
   def set_appointment
-    @appointment ||= current_appointment
-  end
-
-  def current_appointment
-    # code here
+    @appointment = Appointment.find(params[:id])
   end
 
   def appointment_params
