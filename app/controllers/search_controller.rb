@@ -12,7 +12,7 @@ class SearchController < ApplicationController
       end
       search_terms = {
           format:'json',
-          userlocation: "#{get_location[:lat]}, #{get_location[:lng]}" ,
+          userlocation: "#{get_location['lat']}, #{get_location['lng']}" ,
           Keywords: params[:search],
           Page: '1',
           pageSize: '100',

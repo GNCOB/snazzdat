@@ -12,16 +12,19 @@ gem 'jbuilder', '~> 1.2'
 #gem 'devise'
 gem 'haml-rails'
 gem 'pg', '~> 0.16.0'
+#gem 'sqlite3'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'bourbon'
 gem 'font-awesome-rails'
 gem 'rails_12factor'
 gem 'retailigence', :git => "https://github.com/sanarchy7/retailigence.git"
 #gem 'retailigence', :path => '../retailigence'
-#gem 'geokit'
+gem 'geokit'
 #gem 'geokit-rails'
 gem "kaminari" # optional for pagination support
 gem "parse_resource", :git => "https://github.com/sanarchy7/parse_resource.git"
+gem 'valid_email'
+gem 'active_rest_client'
 
 group :development do
   gem 'better_errors'

@@ -5,7 +5,7 @@
       =link_to "Edit", edit_user_path, class: 'btn-link'
     Account Information
   .panel-body
-    %p
+    -#%p
       %strong Username:
       =@user.username
     %p
@@ -14,6 +14,23 @@
     %p
       %strong Gender:
       =@user.gender
-    %p
-      %strong Email:
-      =@user.email
+    -unless @user.email.blank?
+      %p
+        %strong Email:
+        =@user.email
+
+    - unless @user.phone.blank?
+      %p
+        %strong Phone:
+        =number_to_phone @user.phone
+
+    - unless @user.address1.blank?
+      %p
+        %strong Address:
+        %br/
+        =@user.address1
+        - unless @user.address2.blank?
+          =@user.address2
+        %br/
+        ="#{@user.city}, #{@user.state} #{@user.zip_code}"
+

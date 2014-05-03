@@ -1,24 +1,31 @@
 .row.text-center
-  %h4 SnazzDat is your own FREE location-based personal shopping web app.
-  %p &nbsp;
+  =image_tag 'splash_logo_v2.png', id: 'homepage-logo'
+  #homepage-blurb.col-xs-12
+    SnazzDat is your own FREE |
+    location-based personal shopping web app.
+.row.text-center
+  -if !current_user.nil?
+    .col-sm-12
+      %h3{style:"color:#000"}=" Welcome, #{current_user.name}"
+      =link_to 'Sign Out', log_out_path, class: 'btn btn-default btn-lg'
+  -else
+    .col-sm-12
+      #home-login-block.text-center
+        %p
+          =link_to '#', onclick: 'FBLogin();', class: 'btn btn-primary btn-lg' do
+            %i.fa.fa-facebook
+            Login with Facebook
 
-#how-to-use.row.text-center
-  .col-xs-6
-    %strong=link_to "How To Use", how_to_use_path
-  .col-xs-6
-    %strong=link_to "Are You a Business Owner? Partner With Us", "http://snazzdat.com/business"
-
-#splash-logo
-  .text-center
-    =image_tag asset_path 'splash_logo.png'
+        %p
+          .btn-group.btn-group-lg
+            %a.btn.btn-default{href: log_in_path} Sign In
+            %a.btn.btn-default{href: sign_up_path} Sign Up
 
 
--if !current_user.nil?
-
-  %a.btn.btn-default{href: log_out_path} Sign Out
-
--else
-  .text-center
-    .btn-group.btn-group-lg
-      %a.btn.btn-default{href: log_in_path} Sign In
-      %a.btn.btn-default{href: sign_up_path} Sign Up
+.row.text-center
+  .col-xs-12
+    %p
+      %br/
+      =link_to "How To Use", how_to_use_path,  style:"color:#000; font-weight: bold;"
+    %p
+      =link_to "Retailers Click Here", "http://snazzdat.com/business", style:"color:#000; font-weight: bold;"

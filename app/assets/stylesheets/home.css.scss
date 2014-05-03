@@ -2,11 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#home-login-block {
+  //border: solid 1px #fff;
+  //border-radius: 5px;
+  //padding: 20px;
+}
 
-#splash-logo {
-  padding: 50px 0;
+#homepage-blurb {
+  font-size: 24px;
+  font-weight: lighter;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  background: #000;
+  opacity: 0.5;
+}
 
-  img {
-    width: 320px;
-  }
+#homepage-logo {
+  opacity: 0.5;
 }

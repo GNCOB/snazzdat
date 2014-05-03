@@ -1,0 +1,113 @@
+#fb-root
+:javascript
+  window.fbAsyncInit = function() {
+    Parse.FacebookUtils.init({
+      appId      : "#{LibConstants::FACEBOOK_APP_ID}",
+      status     : false, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : false  // parse XFBML
+    });
+
+
+
+      FB.Event.subscribe('auth.authResponseChange', function(response) {
+        // Here we specify what we do with the response anytime this event occurs.
+        if (response.status === 'connected') {
+          // The response object is returned with a status field that lets the app know the current
+          // login status of the person. In this case, we're handling the situation where they
+          // have logged in to the app.
+          /*FB.api('/me', function(response) {
+                console.log('Good to see you, ' + response.name + '.');
+          });*/
+
+        } else if (response.status === 'not_authorized') {
+          // In this case, the person is logged into Facebook, but not into the app, so we call
+          // FB.login() to prompt them to do so.
+          // In real-life usage, you wouldn't want to immediately prompt someone to login
+          // like this, for two reasons:
+          // (1) JavaScript created popup windows are blocked by most browsers unless they
+          // result from direct interaction from people using the app (such as a mouse click)
+          // (2) it is a bad experience to be continually prompted to login upon page load.
+         window.FBLogin();
+        } else {
+          // In this case, the person is not logged into Facebook, so we call the login()
+          // function to prompt them to do so. Note that at this stage there is no indication
+          // of whether they are logged into the app. If they aren't then they'll see the Login
+          // dialog right after they log in to Facebook.
+          // The same caveats as above apply to the FB.login() call here.
+          window.FBLogin();
+        }
+      });
+
+  };
+
+    // Load the SDK asynchronously
+  (function(d){
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
+   js.src = "//connect.facebook.net/en_US/all/debug.js";
+   ref.parentNode.insertBefore(js, ref);
+  }(document));
+
+
+  window.FBLogin = function() {
+        Parse.FacebookUtils.logIn(null, {
+            success: function(user) {
+              var fbData = user.attributes.authData.facebook;
+              FB.api('/me', function(response) {
+              var gender = response.gender[0].toUpperCase()+response.gender.slice(1);
+                Parse.User.current().save({
+                  name: response.name,
+                  gender: gender
+                },
+                {
+                  success: function(successResponse) {
+                    $.ajax({
+                      type: 'POST',
+                      url: "#{sessions_path}",
+                      data: {
+                        facebook: 'login',
+                        user_id: fbData.id+"",
+                        access_token: fbData.access_token+"",
+                        expires: fbData.expiration_date+""
+                      },
+                      success: function(){
+                        window.location.reload();
+                      }
+
+                    });
+
+                  },
+                  error: function(errorResponse, error) {
+                      console.log("ERROR");
+                      console.log(errorResponse);
+                      console.log(error);
+                  }
+                });
+              });
+
+              if (!user.existed()) {
+                console.log("User signed up and logged in through Facebook!");
+              } else {
+                console.log("User logged in through Facebook!");
+              }
+            },
+            error: function(user, error) {
+              console.log(error);
+            }
+          });
+
+
+    }
+
+    window.FBLogout = function(){
+      Parse.User.logOut();
+    }
+
+    $(function(){
+       if ("#{current_user.nil?}" == 'true') {
+           window.FBLogout();
+       }
+
+    });
