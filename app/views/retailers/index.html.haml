@@ -1,0 +1,12 @@
+%h1 Listing retailers
+
+%table
+  %tr
+    %th 'Retailer'
+    %th
+    %th
+
+  - @retailers.names.each do |retailer|
+    %tr
+      %td=retailer
+      %td=link_to "Make Appointment", new_appointment_path(user_id: current_user.id, receiver: retailer)

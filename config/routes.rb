@@ -23,5 +23,5 @@ Snazzdat::Application.routes.draw do
   resources :search, only: [:index]
   resources :partners
   resources :appointments
-
+  resources :retailers
 end
