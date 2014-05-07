@@ -7,24 +7,9 @@ class ApplicationController < ActionController::Base
   helper_method :get_location
 
   def set_location
-    if cookies[CookieConstants::USER_LOCATION].blank?
-      res = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip)
-      if res.success
-        cookies[CookieConstants::USER_LOCATION] = {value: {lat:res.lat, lng: res.lng}.to_json }
-      else
-        cookies[CookieConstants::USER_LOCATION] = {value: {lat:"38.8951", lng: "-77.0367"}.to_json } # Default to DC area
-      end
-    end
+    zip = '20001'
+    session[:current_location] = {lat: "38.8951", lng: "-77.0367", zip_code: zip}
     #head :no_content
-
-=begin
-    if !params[:lat].blank? && !params[:lng].blank? && cookies[CookieConstants::USER_LOCATION].blank?
-      res = Geokit::Geocoders::GoogleGeocoder.reverse_geocode("#{params[:lat]}, #{params[:lng]}")
-      if res.success
-        cookies[CookieConstants::USER_LOCATION] = {value: res.zip}
-      end
-    end
-=end
   end
 
   private
@@ -34,14 +19,15 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    redirect_to log_in_path  if current_user.nil?
+    redirect_to log_in_path if current_user.nil?
   end
 
   def get_location
-    if cookies[CookieConstants::USER_LOCATION].blank?
+    if session[:current_location].blank?
       set_location
     end
-    ActiveSupport::JSON.decode cookies[CookieConstants::USER_LOCATION]
+    @current_location ||= session[:current_location]
+
   end
 
 end

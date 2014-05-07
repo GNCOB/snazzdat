@@ -5,7 +5,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new
     @appointment.attributes = {user: current_user.to_pointer}
     #test data
-    @appointment.attributes = {receiver: 'Dg5GjRJeSV'}
+    @appointment.attributes = {receiver: params[:receiver]}
     @has_error = false
   end
 

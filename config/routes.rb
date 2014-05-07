@@ -24,5 +24,4 @@ Snazzdat::Application.routes.draw do
   resources :partners
   resources :appointments
   resources :retailers
-
 end

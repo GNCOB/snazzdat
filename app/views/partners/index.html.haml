@@ -1,0 +1,29 @@
+%h1 Create a new appointment
+
+%table
+  %tr
+    %th 'Select a store below:'
+    %th
+
+  - @partners.each do |partner|
+    %tr
+      %td= partner
+      %td= link_to "Make Appointment", new_appointment_path(user_id: current_user.id, receiver: partner)
+  %end
+%br
+%table
+  %tr
+  These stores are in your search area but are not on our platform.
+  %tr
+  Help us get them on by selecting the checkbox next to any store name you would like to make an appoint with:
+
+%table
+  %tr
+    %th 'Store'
+  %tr
+
+  - @params['name'].each do |name|
+    %tr
+      %td= name
+      %td= link_to "Make Appointment", new_appointment_path(user_id: current_user.id, receiver: name)
+  %end
