@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user
+  #before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   def new
     @appointment = Appointment.new
@@ -10,12 +11,13 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    @appointment = Appointment.new(params[:id])
-    @appointment.update_attributes(appointment_params)
+    @appointment = Appointment.new(params[:appointment])
     @appointment.attributes = {user: current_user.to_pointer}
     # setting more attributes, then saving
     if @appointment.save
-      redirect_to action: :index
+      @query = Partner.find(@appointment.attributes['receiver'])
+      @partner_name = @query.attributes['name']
+      redirect_to appointment_path
     else
       render action: :new
     end
@@ -23,7 +25,7 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-    set_appointment
+    @appointment = Appointment.find(params[:id])
   end
 
   def index
@@ -31,13 +33,13 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
-    set_appointment
+    @appointment = Appointment.find(params[:id])
   end
 
   def update
     @appointment = Appointment.find(params[:id])
-    if @appointment.update(appointment_params)
-      redirect_to action: :show
+    if @appointment.update(params[:appointment])
+      redirect_to appointment_path
       flash[:notice] = "Appointment Updated."
     else
       render action: :edit
@@ -45,9 +47,10 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
+    @appointment = Appointment.find(params[:id])
     @appointment.destroy
     respond_to do |format|
-      format.html { redirect_to appointments_url_url }
+      format.html { redirect_to appointments_path }
       format.json { head :no_content }
     end
   end

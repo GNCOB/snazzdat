@@ -3,4 +3,5 @@ class Partner < ParseResource::Base
   fields :name, :address, :email, :phone
   validates :name, :email, :phone, presence: true
   validates :phone, numericality: {only_integer: true}
+
 end
