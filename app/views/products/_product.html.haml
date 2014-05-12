@@ -1,0 +1,46 @@
+.product
+  .product-image
+    -if !product['product']['images'].blank?
+      =image_tag(product['product']['images'][0]['ImageInfo']['link'], {class: 'img-responsive'})
+    -else
+      Image coming soon
+  .description
+    .name
+      %strong=product['product']['name']
+  .row
+    .col-sm-6
+      -if !product['product']['brand'].blank?
+        .brand.description-item
+          Brand:
+          =product['product']['brand']
+      .price
+        Price:
+        -if product['price'].blank?
+          See store for details
+        -else
+          $
+          =product['price']
+
+      .size.description-item
+        - if !product['product']['size'].blank?
+          Size(s):
+          =product['product']['size'][0]
+        - else
+          No size information available
+    .col-sm-6
+      .location
+        %strong Store Information
+
+        .name
+          =product['location']['name']
+        .address
+          =product['location']['address']['address1']
+          %br/
+          =product['location']['address']['city']
+          ,
+          =product['location']['address']['state']
+          =product['location']['address']['postal']
+        %small
+          %em
+            Phone:
+            =product['location']['phone']

@@ -1,0 +1,12 @@
+%h3 Snazzy Suggestions
+
+-if @matches.nil?
+
+  %p.lead
+    Please update your user profile to enable your Snazzy Suggestions
+  =link_to "Update user profile", edit_user_path, class: 'btn btn-default'
+
+-else
+  -@matches.each do |match|
+    .col-xs-6
+      =render partial: 'products/product', locals: {product: match}

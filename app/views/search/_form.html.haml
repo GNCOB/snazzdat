@@ -1,0 +1,5 @@
+= form_tag search_index_path, method: :get, class: 'form-horizontal', role: 'form'  do
+  .col-xs-10.form-group
+    =text_field_tag :search, params[:search], :class=>'form-control input-lg', placeholder: 'search apparel'
+  .col-xs-2.control-label
+    =submit_tag :submit, value: "Search", class: 'btn btn-default'

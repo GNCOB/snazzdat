@@ -1,0 +1,31 @@
+.product {
+  margin-bottom: 20px;
+  .product-image {
+    background: #fff;
+    overflow: hidden;
+    img {
+      margin: 0 auto;
+    }
+  }
+
+  .description {
+    /*text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;*/
+    .name {
+      padding: 10px 0;
+      text-align: center;
+      /*text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;*/
+    }
+    .description-item {
+      border-bottom: solid 1px #ccc;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+  }
+}

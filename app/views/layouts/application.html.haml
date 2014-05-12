@@ -1,0 +1,48 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "SnazzDat"
+      %meta{:content => content_for?(:description) ? yield(:description) : "SnazzDat", :name => "description"}
+        =favicon_link_tag 'favicon.ico'
+        = stylesheet_link_tag "application", :media => "all"
+        = javascript_include_tag "application"
+        = javascript_include_tag "//www.parsecdn.com/js/parse-1.2.17.min.js"
+        = csrf_meta_tags
+        = yield(:head)
+  %body{:class => "#{controller_name} #{action_name}"}
+    = render 'shared/fb_root'
+    = render 'layouts/navigation'
+    #layout-container.container
+      .row
+        .col-sm-12
+          = render 'layouts/messages'
+          = yield
+    %footer
+      .navbar.navbar-fixed-bottom.hidden-xs
+        .container
+          .row
+            .col-sm-7
+              .text-left
+                =link_to "About Us", about_us_path
+                =link_to "Terms of Use", terms_path
+                =link_to "Privacy Policy", privacy_path
+                =link_to "FAQs", faqs_path
+                =link_to "How to Measure", measure_path
+                =link_to "How To Use", how_to_use_path
+            .col-sm-5
+              .text-right
+                &copy;
+                =Time.now.year
+                SnazzDat Inc.
+:javascript
+  Parse.initialize("oxvU7BRJzsuOeXusB4wnWU7t3YZrWTFxJ2N5fj9g", "CewakiunRwHgUruOztDv01Tjbo7lnueVxfx3G2vJ");
+  $(function(){
+    var current_location = #{@current_location.nil? ? 'undefined' : @current_location.to_json};
+    if(current_location === undefined) {
+      getUserLocation();
+    }
+     else {
+
+    }
+  });
