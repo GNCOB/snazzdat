@@ -33,10 +33,12 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
-    @appointment = Appointment.find(params[:id])
+
+  @appointment = Appointment.find(params[:id])
   end
 
   def update
+    #update
     @appointment = Appointment.find(params[:id])
     if @appointment.update(params[:appointment])
       redirect_to appointment_path
