@@ -2,8 +2,7 @@
 
 %table
   %tr
-    %th Sender
-    %th Receiver
+    %th Store
     %th City
     %th Zip Code
     %th Email
@@ -11,19 +10,15 @@
     %th
     %th
     %th
-
   - @appointments.each do |a|
     %tr
-      %td= a.user
       %td= a.receiver
       %td= a.city
       %td= a.zip_code
       %td= a.email
       %td= a.date
-      %td= link_to 'Show', a
-      %td= link_to 'Edit', edit_appointment_path(a)
-      %td= link_to 'Destroy', a, :method => :delete, :data => { :confirm => 'Are you sure?' }
-  end
-%br
+      %td= link_to 'Show', user_appointment_path(id: a.id, partner_id: a.partner.id)
+      %td= link_to 'Edit', edit_user_appointment_path(id:a.id, partner_id: a.partner.id)
+      %td= link_to 'Destroy', user_appointment_path(id: a.id, partner_id: a.partner.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'New Appointment', partners_path
+= link_to 'New Appointment', new_user_appointment_path

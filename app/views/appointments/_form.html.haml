@@ -1,13 +1,29 @@
-= simple_form_for [@appointment] do |f|
+= simple_form_for [current_user, @appointment], class: 'form-horizontal' do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :user
-    = f.input :receiver
-    = f.input :city
-    = f.input :zip_code
-    = f.input :email
-    = f.input :date
+  %h1=@partner.name
+  %p
+    =@partner.address1
+    %br/
+    =@partner.address2
+    %br/
+    =@partner.city
+    ,
+    =@partner.state
+    =@partner.zip_code
 
+  .form-group
+    =f.input :city, as: :hidden, input_html: {value: @partner.city}
+    =f.input :zip_code, as: :hidden, input_html: {value: @partner.zip_code}
+    =f.input :email, as: :hidden, input_html: {value: @partner.email}
+
+    =f.input :date, input_html: {data: {behavior: 'datepicker'}}
   .form-actions
-    = f.button :submit
+    =hidden_field_tag :partner_id, @partner.id
+    =f.button :submit, class: 'btn btn-default'
+
+
+:javascript
+  $(function(){
+    $('input[data-behavior~=datepicker]').datepicker();
+  });

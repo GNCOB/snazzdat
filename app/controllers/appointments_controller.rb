@@ -1,69 +1,70 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user
-  #before_action :set_appointment, only: [:show, :edit, :update, :destroy]
-
+  before_action :load_appointment, except: [:new, :create, :select_partner, :index]
+  before_action :load_partner, only: [:new, :create, :edit, :update]
   def new
-    @appointment = Appointment.new
-    @appointment.attributes = {user: current_user.to_pointer}
-    #test data
-    @appointment.attributes = {receiver: params[:receiver]}
-    @has_error = false
+    redirect_to action: :select_partner if @partner.nil?
+    @appointment = Appointment.new(user_id: current_user.id, partner_id: params[:partner_id], email: current_user.email)
   end
 
   def create
-    @appointment = Appointment.new(params[:appointment])
-    @appointment.attributes = {user: current_user.to_pointer}
-    # setting more attributes, then saving
+    @appointment = Appointment.new(appointment_params)
+    @appointment.attributes = {user: current_user.to_pointer, partner: @partner}
+    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
     if @appointment.save
-      @query = Partner.find(@appointment.attributes['receiver'])
-      @partner_name = @query.attributes['name']
-      redirect_to appointment_path
+      #@query = Partner.find(@appointment.attributes['receiver'])
+      #@partner_name = @query.attributes['name']
+      redirect_to user_appointments_path
     else
-      render action: :new
+      render :new, partner_id: @partner.id
     end
 
   end
 
   def show
-    @appointment = Appointment.find(params[:id])
   end
 
   def index
-    @appointments = Appointment.where(:user => current_user.to_pointer)
+    @appointments = Appointment.where(user: current_user.to_pointer)
   end
 
   def edit
-
-  @appointment = Appointment.find(params[:id])
   end
 
   def update
     #update
-    @appointment = Appointment.find(params[:id])
-    if @appointment.update(params[:appointment])
-      redirect_to appointment_path
+    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
+    if @appointment.update(appointment_params)
+      redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
     else
-      render action: :edit
+      render :edit
     end
   end
 
   def destroy
-    @appointment = Appointment.find(params[:id])
     @appointment.destroy
     respond_to do |format|
-      format.html { redirect_to appointments_path }
+      format.html { redirect_to user_appointments_path }
       format.json { head :no_content }
     end
   end
 
+  def select_partner
+    @partners = Partner.all
+  end
+
   private
 
-  def set_appointment
+  def load_appointment
     @appointment = Appointment.find(params[:id])
   end
 
+  def load_partner
+    @partner = params[:partner_id].present? ? Partner.find(params[:partner_id]) : nil
+  end
+
   def appointment_params
-    params.require(:appointment).permit(:user, :receiver, :city, :zip_code, :email, :date)
+    params.require(:appointment).permit(:receiver, :city, :zip_code, :email, :date)
   end
 end

@@ -15,6 +15,9 @@ Snazzdat::Application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show] do
     get :my_matches, on: :member
     resources :sizes
+    resources :appointments do
+      get :select_partner, on: :collection
+    end
   end
   resources :sessions, only: [:new, :create, :destroy] do
     get :password_reset_form, on: :collection
@@ -22,5 +25,4 @@ Snazzdat::Application.routes.draw do
   end
   resources :search, only: [:index]
   resources :partners
-  resources :appointments
 end

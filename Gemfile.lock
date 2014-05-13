@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/sanarchy7/parse_resource.git
-  revision: 97cb90747abd15c4e23c553b77ff9b3a8b3973cd
+  revision: 1902cdb075124457dc33b4321fcb1e51350f363d
   specs:
     parse_resource (1.8.0)
       activemodel
@@ -55,6 +55,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.3.0.2)
+      railties (>= 3.0)
     bourbon (3.2.1)
       sass (~> 3.2)
       thor
@@ -180,6 +182,7 @@ DEPENDENCIES
   active_rest_client
   better_errors
   binding_of_caller
+  bootstrap-datepicker-rails
   bourbon
   coffee-rails (~> 4.0.0)
   font-awesome-rails

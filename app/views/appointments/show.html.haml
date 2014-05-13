@@ -2,7 +2,7 @@
 .panel.panel-default
   .panel-heading
     .pull-right
-      =link_to 'Edit', edit_appointment_path, class: 'btn-link'
+      =link_to 'Edit', edit_user_appointment_path(partner_id: @appointment.partner.id), class: 'btn-link'
     Appointment Information
 .panel-body
 %p
