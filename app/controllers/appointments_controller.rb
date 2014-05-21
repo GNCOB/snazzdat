@@ -1,7 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user
   before_action :load_appointment, except: [:new, :create, :select_partner, :index]
-  before_action :load_partner, only: [:new, :create, :edit, :update]
+  before_action :load_partner, only: [:new, :create, :update]
   def new
     redirect_to action: :select_partner if @partner.nil?
     @appointment = Appointment.new(user_id: current_user.id, partner_id: params[:partner_id], email: current_user.email)
@@ -10,7 +10,6 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     @appointment.attributes = {user: current_user.to_pointer, partner: @partner}
-    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
     if @appointment.save
       #@query = Partner.find(@appointment.attributes['receiver'])
       #@partner_name = @query.attributes['name']
@@ -29,15 +28,17 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
+    @partner = @appointment.partner
   end
 
   def update
-    #update
-    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
-    if @appointment.update(appointment_params)
+    new_appointment_params = appointment_params
+    new_appointment_params[:date] = Appointment.to_date_object Date.strptime(appointment_params[:date], '%m/%d/%Y')
+    if @appointment.update(new_appointment_params)
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
     else
+      puts "APPOINTMENT ERROR: #{@appointment.errors.messages.inspect}"
       render :edit
     end
   end

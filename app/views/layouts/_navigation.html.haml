@@ -27,7 +27,7 @@
       %li
         =link_to "Size Profile", current_user.size.nil? ? new_user_size_path(user_id: current_user.id) : user_size_path(user_id: current_user.id, id: current_user.size.id)
       %li
-        =link_to "Make Appointment", select_partner_user_appointments_path(user_id: current_user.id)
+        =link_to "My Appointments", user_appointments_path(user_id: current_user.id)
       %li
         =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
 
