@@ -13,6 +13,7 @@ class AppointmentsController < ApplicationController
     if @appointment.save
       #@query = Partner.find(@appointment.attributes['receiver'])
       #@partner_name = @query.attributes['name']
+      AppointmentsMailer.new_appointment_notification(@appointment).deliver
       redirect_to user_appointments_path
     else
       render :new, partner_id: @partner.id
