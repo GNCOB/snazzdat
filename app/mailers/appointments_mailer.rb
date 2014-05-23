@@ -8,7 +8,7 @@ class AppointmentsMailer < ActionMailer::Base
   #
   def new_appointment_notification appointment
     @user = appointment.user
-    @partner = Partner.find(appointment.receiver)
+    @partner = appointment.partner
     mail to: appointment.email
   end
 end

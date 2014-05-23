@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 1.2'
 #gem 'devise'
 gem 'haml-rails'
 gem 'pg', '~> 0.16.0'
-#gem 'sqlite3'
+gem 'sqlite3'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'bourbon'
 gem 'font-awesome-rails'
@@ -25,10 +25,11 @@ gem "kaminari" # optional for pagination support
 gem "parse_resource", :git => "https://github.com/sanarchy7/parse_resource.git"
 gem 'valid_email'
 gem 'active_rest_client'
+gem 'bootstrap-datepicker-rails'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'hub', :require=>nil
+  gem 'hub', :require => nil
   gem 'quiet_assets'
 end

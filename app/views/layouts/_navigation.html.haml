@@ -25,12 +25,9 @@
       %li
         =link_to "My Account", user_path(current_user.id)
       %li
-        - if current_user.size.nil?
-          =link_to "Size Profile", new_user_size_path(user_id: current_user.id)
-        - else
-          =link_to "Size Profile", user_size_path(user_id: current_user.id, id: current_user.size.id)
+        =link_to "Size Profile", current_user.size.nil? ? new_user_size_path(user_id: current_user.id) : user_size_path(user_id: current_user.id, id: current_user.size.id)
       %li
-        =link_to "Appointments", new_appointment_path(user_id: current_user.id)
+        =link_to "My Appointments", user_appointments_path(user_id: current_user.id)
       %li
         =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
 

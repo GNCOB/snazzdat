@@ -1,0 +1,18 @@
+%h1 Show partner
+
+%p
+  %b Name:
+  =@partner.name
+%p
+  %b Address:
+  = @partner.address
+%p
+  %b Email:
+  = @partner.email
+%p
+  %b Phone:
+  = @partner.phone
+
+= link_to 'Edit', edit_partner_path(@partner)
+\|
+= link_to 'Back', partners_path
