@@ -21,7 +21,7 @@ class PartnersController < ApplicationController
 
   # GET /partners/1/edit
   def edit
-    set_partner
+
   end
 
   # POST /partners
