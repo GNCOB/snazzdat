@@ -1,24 +1,25 @@
-%h1 Listing Appointments
+%h1 My Appointments
 
-%table
+%table.table.table-striped.table-bordered
   %tr
     %th Store
     %th City
     %th Zip Code
     %th Email
     %th Date
-    %th
-    %th
-    %th
+    %th Actions
   - @appointments.each do |a|
     %tr
-      %td= a.receiver
+      %td= a.partner.name
       %td= a.city
       %td= a.zip_code
       %td= a.email
-      %td= a.date
-      %td= link_to 'Show', user_appointment_path(id: a.id)
-      %td= link_to 'Edit', edit_user_appointment_path(id:a.id)
-      %td= link_to 'Destroy', user_appointment_path(id: a.id, partner_id: a.partner.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= a.date.strftime("%m/%d/%Y at %T")
+      %td
+        = link_to 'Show', user_appointment_path(id: a.id)
+        &nbsp;
+        = link_to 'Edit', edit_user_appointment_path(id:a.id)
+        &nbsp;
+        = link_to 'Delete', user_appointment_path(id: a.id, partner_id: a.partner.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'New Appointment', new_user_appointment_path
+= link_to 'New Appointment', new_user_appointment_path, class: 'btn btn-default'
