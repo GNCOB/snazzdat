@@ -39,7 +39,6 @@ class AppointmentsController < ApplicationController
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
     else
-      puts "APPOINTMENT ERROR: #{@appointment.errors.messages.inspect}"
       render :edit
     end
   end
@@ -54,6 +53,7 @@ class AppointmentsController < ApplicationController
 
   def select_partner
     @partners = Partner.all
+    #@retailers = Retailer.all(userlocation: "#{get_location['lat']}, #{get_location['lng']}")
   end
 
   private

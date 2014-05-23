@@ -5,11 +5,6 @@ class PartnersController < ApplicationController
   # GET /partners.json
   def index
     @partners = Partner.all
-
-    #@r = Retailer.all(userlocation: "#{get_location['lat']}, #{get_location['lng']}")
-    @r = ['Store1', 'Store2', 'Store3']
-    @r.each { @params = {'name' => @r} }
-
   end
 
   # GET /partners/1
