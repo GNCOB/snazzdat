@@ -8,11 +8,11 @@ class AppointmentsMailer < ActionMailer::Base
   #
   def user_new_appointment_notification appointment
     @appointment = appointment
-    mail to: appointment.user.email, subject: "New appointment notification: #{@appointment.partner.name}"
+    mail to: appointment.user.email, subject: "New appointment notification for #{@appointment.partner.name}"
   end
 
   def partner_new_appointment_notification appointment
     @appointment = appointment
-    mail to: appointment.partner.email, subject: "New appointment notification: #{@appointment.user.name}"
+    mail to: appointment.partner.email, subject: "New appointment notification for #{@appointment.user.name}"
   end
 end
