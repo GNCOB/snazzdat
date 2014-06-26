@@ -8,7 +8,7 @@
   - @partners.each do |partner|
     %tr
       %td= partner.name
-      %td= link_to "Make Appointment", new_appointment_path(user_id: current_user.id, receiver: partner)
+      %td= link_to "Make Appointment", new_appointment_path(user_id: current_user.id)
   %end
 %br
 %table
@@ -25,5 +25,5 @@
   - @params['name'].each do |name|
     %tr
       %td= name
-      %td= link_to "Make Appointment", new_appointment_path(user_id: current_user.id, receiver: name)
+      %td= link_to "Make Appointment", new_appointment_path(user_id: current_user.id)
   %end

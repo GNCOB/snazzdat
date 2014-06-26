@@ -1,7 +1,7 @@
 = simple_form_for [current_user, @appointment], class: 'form-horizontal' do |f|
   = f.error_notification
 
-  %h1=@partner.name
+  %h4=@partner.name
   %p
     =@partner.address1
     %br/
@@ -13,10 +13,9 @@
     =@partner.zip_code
 
   .form-group
-    =f.input :city, as: :hidden, input_html: {value: @partner.city}
-    =f.input :zip_code, as: :hidden, input_html: {value: @partner.zip_code}
-    =f.input :email, as: :hidden, input_html: {value: @partner.email}
-    =f.input :date, input_html: {data: {behavior: 'datepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%m/%d/%Y')}
+    =f.input :temp_date, label: 'Date', input_html: {data: {behavior: 'datepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%m/%d/%Y')}
+    =f.input :temp_time, label: 'Time', input_html: {data: {behavior: 'timepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%I:%M %P')}
+    =f.input :notes, label: 'Addtional Notes', as: :text
   .form-actions
     =hidden_field_tag :partner_id, @partner.id
     =f.button :submit, class: 'btn btn-default'
@@ -25,4 +24,5 @@
 :javascript
   $(function(){
     $('input[data-behavior~=datepicker]').datepicker();
+    $('input[data-behavior~=timepicker]').timepicker();
   });

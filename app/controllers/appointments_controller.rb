@@ -10,10 +10,10 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     @appointment.attributes = {user: current_user.to_pointer, partner: @partner}
+    @appointment.date =  Appointment.to_date_object DateTime.strptime("#{params[:appointment][:temp_date]} #{params[:appointment][:temp_time]}", '%m/%d/%Y %I:%M %P')
     if @appointment.save
-      #@query = Partner.find(@appointment.attributes['receiver'])
-      #@partner_name = @query.attributes['name']
-      AppointmentsMailer.new_appointment_notification(@appointment).deliver
+      AppointmentsMailer.user_new_appointment_notification(@appointment).deliver
+      AppointmentsMailer.partner_new_appointment_notification(@appointment).deliver
       redirect_to user_appointments_path
     else
       render :new, partner_id: @partner.id
@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
 
   def update
     new_appointment_params = appointment_params
-    new_appointment_params[:date] = Appointment.to_date_object Date.strptime(appointment_params[:date], '%m/%d/%Y')
+    new_appointment_params[:date] = Appointment.to_date_object DateTime.strptime("#{params[:appointment][:temp_date]} #{params[:appointment][:temp_time]}", '%m/%d/%Y %I:%M %P')
     if @appointment.update(new_appointment_params)
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
@@ -67,6 +67,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:receiver, :city, :zip_code, :email, :date)
+    params.require(:appointment).permit(:notes)
   end
 end

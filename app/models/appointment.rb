@@ -1,10 +1,13 @@
 class Appointment < ParseResource::Base
   belongs_to :user
   belongs_to :partner
-  before_save :parse_date
+  #has_one :location
 
-  fields :receiver, :city, :zip_code, :email, :date
-  validates :city, :zip_code, :email, :date, presence: true
+  #before_save :parse_date
+
+  fields :date, :notes
+  validates :date, presence: true
+  attr_accessor :temp_date, :temp_time
 
   private
 

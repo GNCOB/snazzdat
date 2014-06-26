@@ -1,21 +1,13 @@
-%h3 Show Appointment
-.panel.panel-default
-  .panel-heading
-    .pull-right
-      =link_to 'Edit', edit_user_appointment_path(partner_id: @appointment.partner.id), class: 'btn-link'
-    Appointment Information
-.panel-body
 %p
   %strong Name:
-  =@partner_name #Partner.find(@appointment.receiver).attributes['name']
-%p
-  %strong Style:
-  =@appointment.email
+  =@appointment.partner.name
 %p
   %strong Date:
-  =@appointment.date
+  =localize(@appointment.date, format: '%m/%d/%Y')
 %p
   %strong Time:
-  =@appointment.date
+  =localize(@appointment.date, format: '%I:%M %P')
 
-
+=link_to edit_user_appointment_path(partner_id: @appointment.partner.id), class: 'btn btn-default' do
+  %i.fa.fa-pencil-square-o
+  Edit
