@@ -20,6 +20,8 @@ class SearchController < ApplicationController
           range: '30',
           rcategory: 'Apparel'
       }
+      puts "location: ---->"
+      puts get_location.inspect
       product_search =  Retailigence::Product.new
       results = product_search.search search_terms
 
