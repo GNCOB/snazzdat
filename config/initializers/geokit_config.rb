@@ -1,3 +1,4 @@
+=begin
 require 'geokit'
 if defined? Geokit
 # These defaults are used in Geokit::Mappable.distance_to and in acts_as_mappable
@@ -72,3 +73,4 @@ if defined? Geokit
 # Geokit::Geocoders::ip_provider_order = [:external,:geo_plugin,:ip]
 
 end
+=end

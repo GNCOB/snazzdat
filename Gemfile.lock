@@ -76,8 +76,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.0.3.2)
       railties (>= 3.2, < 5.0)
-    geokit (1.8.4)
-      multi_json (>= 1.3.2)
+    geocoder (1.2.2)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -108,7 +107,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (5.3.3)
-    multi_json (1.10.0)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     patron (0.4.18)
@@ -188,7 +187,7 @@ DEPENDENCIES
   bourbon
   coffee-rails (~> 4.0.0)
   font-awesome-rails
-  geokit
+  geocoder
   haml-rails
   hub
   jbuilder (~> 1.2)
