@@ -1,7 +1,6 @@
-%h3 Select a Store to make an appointment with...
-%ul
+%h3 Please select a store
+
+%ul.list-group
   - @partners.each do |partner|
-    %li
-      =partner.name
-      |
-      =link_to 'Make Appointment', new_user_appointment_path(partner_id: partner.id)
+    %li.list-group-item
+      =link_to partner.name, new_user_appointment_path(partner_id: partner.id)

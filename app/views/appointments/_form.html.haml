@@ -15,7 +15,9 @@
   .form-group
     =f.input :temp_date, label: 'Date', input_html: {data: {behavior: 'datepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%m/%d/%Y')}
     =f.input :temp_time, label: 'Time', input_html: {data: {behavior: 'timepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%I:%M %P')}
-    =f.input :notes, label: 'Addtional Notes', as: :text
+    =f.input :notes, label: 'Addtional Notes', as: :text, input_html: {maxlength: '250'}
+    %small
+      %em 250 character limit
   .form-actions
     =hidden_field_tag :partner_id, @partner.id
     =f.button :submit, class: 'btn btn-default'

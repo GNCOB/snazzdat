@@ -24,4 +24,8 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def business
+
+  end
+
 end

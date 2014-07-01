@@ -22,9 +22,6 @@ class SearchController < ApplicationController
       }
       product_search =  Retailigence::Product.new
       results = product_search.search search_terms
-      puts '#######'
-      puts results
-      puts '######'
 
       unless results['RetailigenceSearchResult']['results'].nil?
         results['RetailigenceSearchResult']['results'].each do |r|

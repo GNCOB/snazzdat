@@ -83,8 +83,8 @@ Snazzdat::Application.configure do
       :authentication => :plain,
       :address => "smtp.mailgun.org",
       :port => 587,
-      :domain => "sandbox9c277581c32249cbb851b48bc044e43c.mailgun.org",
-      :user_name => "postmaster@sandbox9c277581c32249cbb851b48bc044e43c.mailgun.org",
-      :password => "2mglk31r1lx4"
+      :domain => "snazzdat.com",
+      :user_name => "postmaster@snazzdat.com",
+      :password => "7d6vsxh2u851"
   }
 end

@@ -12,6 +12,7 @@ Snazzdat::Application.routes.draw do
   get '/measure' => 'static_pages#measure'
   get '/about_us' => 'static_pages#about_us'
   get '/how_to_use' => 'static_pages#how_to_use'
+  get '/business' => 'static_pages#business', as: 'static_business'
   resources :users, only: [:new, :create, :edit, :update, :show] do
     get :my_matches, on: :member
     resources :sizes

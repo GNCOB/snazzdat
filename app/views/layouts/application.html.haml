@@ -11,6 +11,7 @@
         = csrf_meta_tags
         = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
+    = render 'shared/error_modal'
     = render 'shared/fb_root'
     = render 'layouts/navigation'
     #layout-container.container
