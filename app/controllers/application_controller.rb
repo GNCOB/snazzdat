@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
   def set_location
     if cookies[CookieConstants::USER_LOCATION].blank?
       res = Geokit::Geocoders::IpGeocoder.geocode(request.remote_ip)
+      puts "GEOKIT results: #{res.inspect}"
+      puts "REMOTE IP: #{request.remote_ip}"
+      puts "params: #{params.inspect}"
       if res.success
         cookies[CookieConstants::USER_LOCATION] = {value: {lat:res.lat, lng: res.lng}.to_json }
       else
