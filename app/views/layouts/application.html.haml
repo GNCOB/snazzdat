@@ -37,7 +37,7 @@
                 =Time.now.year
                 SnazzDat Inc.
 :javascript
-  Parse.initialize("oxvU7BRJzsuOeXusB4wnWU7t3YZrWTFxJ2N5fj9g", "CewakiunRwHgUruOztDv01Tjbo7lnueVxfx3G2vJ");
+  Parse.initialize("#{LibConstants::PARSE_APP_ID}", "#{LibConstants::PARSE_JS_KEY}");
   $(function(){
     var current_location = #{@current_location.nil? ? 'undefined' : @current_location.to_json};
     if(current_location === undefined) {
