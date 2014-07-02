@@ -1,11 +1,33 @@
 ="Hi #{@appointment.partner.name},"
 ="Please prepare an ensemble/look for #{@appointment.user.name} using the following preferences:"
 
+-if @appointment.user.size.present?
+  \
+  Size Profile:
+  \
+  ="Neck: #{@appointment.user.size.neck}inches"
+  ="Chest: #{@appointment.user.size.chest}inches"
+  ="Sleeve: #{@appointment.user.size.sleeve}inches"
+  ="Bust: #{@appointment.user.size.bust}inches"
+  ="Waist: #{@appointment.user.size.waist}inches"
+  ="Hips: #{@appointment.user.size.hips}inches"
+  ="Inseam: #{@appointment.user.size.inseam}inches"
+  ="Height: #{@appointment.user.size.height}inches"
+  ="Weight: #{@appointment.user.size.weight}lbs"
+
+-if @appointment.budget.present?
+  \
+  Budget:
+  =BudgetConstants.find_by_code(@appointment.budget)[:name]
+
+\
+\
+Additional Notes:
 =@appointment.notes
-
-
-="Expected arrival at your store on #{localize(@appointment.date, format: '%m/%d/%Y at %I:%M %P')}"
-
-
+\
+\
+="Expected arrival at your store is #{localize(@appointment.date, format: '%m/%d/%Y at %I:%M %P')}"
+\
+\
 Thank you,
 The SnazzDat Team

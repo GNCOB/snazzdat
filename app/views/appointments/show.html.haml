@@ -7,7 +7,18 @@
 %p
   %strong Time:
   =localize(@appointment.date, format: '%I:%M %P')
+-if @appointment.budget.present?
+  %p
+    %strong Budget:
+    =BudgetConstants.find_by_code(@appointment.budget)[:name]
+
+%p
+  %strong Addtional Notes:
+  %br/
+  =@appointment.notes
 
 =link_to edit_user_appointment_path(partner_id: @appointment.partner.id), class: 'btn btn-default' do
   %i.fa.fa-pencil-square-o
   Edit
+
+=link_to "Back to Appointments", user_appointments_path(user_id: current_user.id), class:'btn btn-link'

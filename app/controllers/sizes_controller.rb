@@ -10,7 +10,7 @@ class SizesController < ApplicationController
     @size = Size.new(size_params)
     @size.attributes = {user: current_user.to_pointer}
     if @size.save
-      redirect_to root_url
+      redirect_to action: :show
     else
       render action: :new
     end
@@ -33,9 +33,10 @@ class SizesController < ApplicationController
     @size.attributes = {user: current_user.to_pointer}
     if @size.update(size_params)
       flash[:notice] = "Profile Updated."
+      redirect_to action: :show
     else
+      render action: :edit
     end
-    render action: :edit
   end
 
   private
