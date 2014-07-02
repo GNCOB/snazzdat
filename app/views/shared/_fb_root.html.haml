@@ -52,14 +52,15 @@
 
 
   window.FBLogin = function() {
-        Parse.FacebookUtils.logIn(null, {
+        Parse.FacebookUtils.logIn('email', {
             success: function(user) {
               var fbData = user.attributes.authData.facebook;
               FB.api('/me', function(response) {
               var gender = response.gender[0].toUpperCase()+response.gender.slice(1);
                 Parse.User.current().save({
                   name: response.name,
-                  gender: gender
+                  gender: gender,
+                  email: response.email
                 },
                 {
                   success: function(successResponse) {
@@ -95,6 +96,8 @@
             },
             error: function(user, error) {
               console.log(error);
+              console.log(user);
+              alert('Please grant us permissions in order to log in.  If you are having problems logging in, please contact us at admin@snazzdat.com');
             }
           });
 
