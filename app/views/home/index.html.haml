@@ -11,15 +11,14 @@
   -else
     .col-sm-12
       #home-login-block.text-center
-        %p
-          =link_to '#', onclick: 'FBLogin();', class: 'btn btn-primary btn-lg' do
-            %i.fa.fa-facebook
-            Login with Facebook
+        =link_to '#', onclick: 'FBLogin();', class: 'btn btn-primary btn-lg' do
+          %i.fa.fa-facebook
+          Login with Facebook
 
-        %p
-          .btn-group.btn-group-lg
-            %a.btn.btn-default{href: log_in_path} Sign In
-            %a.btn.btn-default{href: sign_up_path} Sign Up
+        -#%p
+        -#  .btn-group.btn-group-lg
+        -#    %a.btn.btn-default{href: log_in_path} Sign In
+        -#    %a.btn.btn-default{href: sign_up_path} Sign Up
 
 
 .row.text-center
