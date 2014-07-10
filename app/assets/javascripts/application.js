@@ -7,8 +7,6 @@
 //= require bootstrap.min
 //= require jasny-bootstrap.min
 //= require geo
-//= require bootstrap-datepicker
-//= require jquery.timepicker
 
 
 $(function(){
