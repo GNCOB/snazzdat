@@ -11,21 +11,18 @@
     ,
     =@partner.state
     =@partner.zip_code
-
-  .form-group
-    =f.input :temp_date, label: 'Date', input_html: {data: {behavior: 'datepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%m/%d/%Y')}
-    =f.input :temp_time, label: 'Time', input_html: {data: {behavior: 'timepicker'}, value: f.object.date.nil? ? '' : localize(f.object.date, format: '%I:%M %P')}
-    =f.input :budget, label: 'What\'s your budget', collection: BudgetConstants::ALL.map{|b|[b[:name], b[:code]]}
-    =f.input :notes, label: 'Addtional Notes', as: :text, input_html: {maxlength: '250'}
-    %small
-      %em 250 character limit
+  .form-group.row
+    .col-md-2.col-xs-12
+      Date
+    .col-md-10.col-xs-12
+      =date_select('appointment', 'date', {start_year: Time.now.year})
+  .form-group.row
+    .col-md-2.col-xs-12
+      Time
+    .col-md-10.col-xs-12
+      =time_select('appointment', 'date', {minute_step: 30})
+  =f.input :budget, label: 'What\'s your budget', collection: BudgetConstants::ALL.map{|b|[b[:name], b[:code]]}
+  =f.input :notes, label: 'Additional Notes', as: :text, input_html: {maxlength: '250'}, hint: 'Please add any additional details for the stylist; ex: preferred colors, style, etc. (250 character limit)'
   .form-actions
     =hidden_field_tag :partner_id, @partner.id
     =f.button :submit, class: 'btn btn-default'
-
-
-:javascript
-  $(function(){
-    $('input[data-behavior~=datepicker]').datepicker();
-    $('input[data-behavior~=timepicker]').timepicker();
-  });

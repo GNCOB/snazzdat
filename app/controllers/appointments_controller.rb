@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     @appointment.attributes = {user: current_user.to_pointer, partner: @partner}
-    @appointment.date =  Appointment.to_date_object DateTime.strptime("#{params[:appointment][:temp_date]} #{params[:appointment][:temp_time]}", '%m/%d/%Y %I:%M %P')
+    @appointment.date =  Appointment.to_date_object DateTime.strptime("#{params[:appointment]['date(2i)']}/#{params[:appointment]['date(3i)']}/#{params[:appointment]['date(1i)']}  #{params[:appointment]['date(4i)']}:#{params[:appointment]['date(5i)']}", '%m/%d/%Y %H:%M')
     if @appointment.save
       AppointmentsMailer.user_new_appointment_notification(@appointment).deliver
       AppointmentsMailer.partner_new_appointment_notification(@appointment).deliver
@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
 
   def update
     new_appointment_params = appointment_params
-    new_appointment_params[:date] = Appointment.to_date_object DateTime.strptime("#{params[:appointment][:temp_date]} #{params[:appointment][:temp_time]}", '%m/%d/%Y %I:%M %P')
+    new_appointment_params[:date] = Appointment.to_date_object DateTime.strptime("#{params[:appointment]['date(2i)']}/#{params[:appointment]['date(3i)']}/#{params[:appointment]['date(1i)']}  #{params[:appointment]['date(4i)']}:#{params[:appointment]['date(5i)']}", '%m/%d/%Y %H:%M')
     if @appointment.update(new_appointment_params)
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
