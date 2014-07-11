@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     @appointment.attributes = {user: current_user.to_pointer, partner: @partner}
-    @appointment.date =  Appointment.to_date_object DateTime.strptime("#{params[:appointment]['date(2i)']}/#{params[:appointment]['date(3i)']}/#{params[:appointment]['date(1i)']}  #{params[:appointment]['date(4i)']}:#{params[:appointment]['date(5i)']}", '%m/%d/%Y %H:%M')
+    @appointment.date =  Appointment.to_date_object(set_date(params[:appointment]))
     if @appointment.save
       AppointmentsMailer.user_new_appointment_notification(@appointment).deliver
       AppointmentsMailer.partner_new_appointment_notification(@appointment).deliver
@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
 
   def update
     new_appointment_params = appointment_params
-    new_appointment_params[:date] = Appointment.to_date_object DateTime.strptime("#{params[:appointment]['date(2i)']}/#{params[:appointment]['date(3i)']}/#{params[:appointment]['date(1i)']}  #{params[:appointment]['date(4i)']}:#{params[:appointment]['date(5i)']}", '%m/%d/%Y %H:%M')
+    new_appointment_params[:date] = Appointment.to_date_object(set_date(params[:appointment]))
     if @appointment.update(new_appointment_params)
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
@@ -68,5 +68,15 @@ class AppointmentsController < ApplicationController
 
   def appointment_params
     params.require(:appointment).permit(:notes, :budget)
+  end
+
+  def set_date appointment_from_params
+    DateTime.strptime("#{appointment_from_params['date(2i)']}/#{appointment_from_params['date(3i)']}/#{appointment_from_params['date(1i)']}  #{appointment_from_params['date(4i)']}:#{appointment_from_params['date(5i)']}", '%m/%d/%Y %H:%M')
+    #add validation to model
+=begin
+    if d.present? && d < DateTime.current
+      errors.add(:date, "can't be in the past")
+    end
+=end
   end
 end

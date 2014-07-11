@@ -20,7 +20,7 @@
     .col-md-2.col-xs-12
       Time
     .col-md-10.col-xs-12
-      =time_select('appointment', 'date', {minute_step: 30})
+      =time_select('appointment', 'date', {minute_step: 30, ampm: true, ignore_date: true})
   =f.input :budget, label: 'What\'s your budget', collection: BudgetConstants::ALL.map{|b|[b[:name], b[:code]]}
   =f.input :notes, label: 'Additional Notes', as: :text, input_html: {maxlength: '250'}, hint: 'Please add any additional details for the stylist; ex: preferred colors, style, etc. (250 character limit)'
   .form-actions
