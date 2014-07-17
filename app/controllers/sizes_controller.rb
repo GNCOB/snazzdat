@@ -1,8 +1,9 @@
 class SizesController < ApplicationController
   before_action :authenticate_user
-  before_action :get_size, except: [:create, :new]
+  before_action :get_size, except: [:create]
 
   def new
+    redirect_to action: :index if @size.present?
     @size = Size.new(user_id: current_user.id)
   end
 
@@ -10,7 +11,7 @@ class SizesController < ApplicationController
     @size = Size.new(size_params)
     @size.attributes = {user: current_user.to_pointer}
     if @size.save
-      redirect_to action: :show
+      redirect_to action: :index
     else
       render action: :new
     end
@@ -35,7 +36,7 @@ class SizesController < ApplicationController
       flash[:notice] = "Profile Updated."
       redirect_to action: :show
     else
-      render action: :edit
+      redirect_to action: :index
     end
   end
 
