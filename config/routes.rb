@@ -24,6 +24,6 @@ Snazzdat::Application.routes.draw do
     get :password_reset_form, on: :collection
     post :password_reset, on: :collection
   end
-  resources :search, only: [:index]
+  #resources :search, only: [:index]
   resources :partners
 end

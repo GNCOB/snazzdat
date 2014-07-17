@@ -28,8 +28,6 @@
         =link_to "Size Profile", current_user.size.nil? ? new_user_size_path(user_id: current_user.id) : user_size_path(user_id: current_user.id, id: current_user.size.id)
       %li
         =link_to "My Appointments", user_appointments_path(user_id: current_user.id)
-      %li
-        =link_to "Snazzy Suggestions", my_matches_user_path(id: current_user.id)
 
   %hr/
 
@@ -59,8 +57,6 @@
         &copy;
         =Time.now.year
         SnazzDat Inc.
-    %div
-      %small{style:"color: #999"} Powered by Retailigence
 
 .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
   .container-fluid
@@ -71,13 +67,3 @@
 
       %a#nav-brand{href: root_path} SnazzDat
       %sup beta
-
-    #main-search-bar
-      .hidden-xs
-        = form_tag search_index_path, method: :get, class: 'navbar-form navbar-left', role: 'search' do
-          .form-group
-            =text_field_tag :search, params[:search], :class=>'form-control', placeholder: 'search local fashion now'
-      .visible-xs
-        = form_tag search_index_path, method: :get, class: 'navbar-form', role: 'search' do
-          .form-group
-            =text_field_tag :search, params[:search], :class=>'form-control', placeholder: 'search local fashion now'
