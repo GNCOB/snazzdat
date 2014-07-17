@@ -3,7 +3,12 @@ class Appointment < ParseResource::Base
   belongs_to :partner
   #has_one :location
   fields :date, :notes, :budget
-  validates :date, presence: true
-  attr_accessor :temp_date, :temp_time
+  validates :date, :budget, presence: true
+  validate :is_date_in_past?
 
+  def is_date_in_past?
+    if date.present? && date < DateTime.now
+      errors.add(:date, 'Appointment date and time cannot be in the past')
+    end
+  end
 end

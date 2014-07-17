@@ -2,12 +2,12 @@
 
 - @appointments.each do |appointment|
   .row
-    .col-md-6.col-xs-12
+    .col-sm-6.col-xs-12
       =link_to appointment.partner.name, user_appointment_path(id:appointment.id)
       %em="#{appointment.partner.city}, #{appointment.partner.state} #{appointment.partner.zip_code}"
-    .col-md-3.col-xs-6
-      =appointment.date.strftime("%m/%d/%Y at %I:%M%P")
-    .col-md-3.col-xs-6
+    .col-sm-3.col-xs-12
+      %strong=appointment.date.strftime("%m/%d/%Y at %I:%M%P")
+    .col-sm-3.col-xs-12
       = link_to edit_user_appointment_path(id:appointment.id) do
         %i.fa.fa-pencil-square-o
         Edit

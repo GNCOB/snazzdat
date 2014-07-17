@@ -35,7 +35,8 @@ class AppointmentsController < ApplicationController
   def update
     new_appointment_params = appointment_params
     new_appointment_params[:date] = Appointment.to_date_object(set_date(params[:appointment]))
-    if @appointment.update(new_appointment_params)
+    @appointment.date = new_appointment_params[:date]
+    if @appointment.valid? && @appointment.update(new_appointment_params)
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
     else
@@ -72,11 +73,5 @@ class AppointmentsController < ApplicationController
 
   def set_date appointment_from_params
     DateTime.strptime("#{appointment_from_params['date(2i)']}/#{appointment_from_params['date(3i)']}/#{appointment_from_params['date(1i)']}  #{appointment_from_params['date(4i)']}:#{appointment_from_params['date(5i)']}", '%m/%d/%Y %H:%M')
-    #add validation to model
-=begin
-    if d.present? && d < DateTime.current
-      errors.add(:date, "can't be in the past")
-    end
-=end
   end
 end
