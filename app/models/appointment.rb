@@ -7,7 +7,7 @@ class Appointment < ParseResource::Base
   validate :is_date_in_past?
 
   def is_date_in_past?
-    if date.present? && date < DateTime.now
+    if date.present? && date < Time.zone.now
       errors.add(:date, 'Appointment date and time cannot be in the past')
     end
   end

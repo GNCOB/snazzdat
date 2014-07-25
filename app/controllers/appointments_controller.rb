@@ -72,6 +72,6 @@ class AppointmentsController < ApplicationController
   end
 
   def set_date appointment_from_params
-    DateTime.strptime("#{appointment_from_params['date(2i)']}/#{appointment_from_params['date(3i)']}/#{appointment_from_params['date(1i)']}  #{appointment_from_params['date(4i)']}:#{appointment_from_params['date(5i)']}", '%m/%d/%Y %H:%M')
+    DateTime.strptime("#{appointment_from_params['date(2i)']}/#{appointment_from_params['date(3i)']}/#{appointment_from_params['date(1i)']}  #{appointment_from_params['date(4i)']}:#{appointment_from_params['date(5i)']}#{Time.zone.formatted_offset}", '%m/%d/%Y %H:%M%z')
   end
 end
