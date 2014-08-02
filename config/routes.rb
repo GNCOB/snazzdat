@@ -1,8 +1,6 @@
 Snazzdat::Application.routes.draw do
   resources :locations
   root :to => 'home#index'
-  post '/location/set', to: 'application#set_location'
-  get '/location/get', to: 'application#get_location'
   get '/login' => 'sessions#new', as: :log_in
   get '/logout' => 'sessions#destroy', as: :log_out
   get '/signup' => 'users#new', as: :sign_up
@@ -24,6 +22,6 @@ Snazzdat::Application.routes.draw do
     get :password_reset_form, on: :collection
     post :password_reset, on: :collection
   end
-  #resources :search, only: [:index]
   resources :partners
+  resources :retailers, only: [:create, :update]
 end

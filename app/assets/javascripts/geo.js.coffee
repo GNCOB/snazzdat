@@ -1,14 +1,13 @@
 
 success = (position) ->
-  $.post('/location/set', {lat:position.coords.latitude , lng:position.coords.longitude })
-
+  $.cookie('location', {lat: position.coords.latitude, lng: position.coords.longitude})
 error = (msg) ->
-  s = $('#geolocate_error')
-  s.html(typeof msg == 'string' ? msg : "failed")
+  console.log 'fail'
+  console.log msg
 
-window.getUserLocation = ->
-  ###if navigator.geolocation
-    navigator.geolocation.getCurrentPosition(success, error)
+@getUserLoation = ->
+  if navigator.geolocation
+    if !$.cookie('location')?
+      navigator.geolocation.getCurrentPosition(success, error)
   else
-    error 'not supported'###
-  null
+    error 'not supported'

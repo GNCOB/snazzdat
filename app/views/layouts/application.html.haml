@@ -2,14 +2,15 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "SnazzDat"
-      %meta{:content => content_for?(:description) ? yield(:description) : "SnazzDat", :name => "description"}
-        =favicon_link_tag 'favicon.ico'
-        = stylesheet_link_tag "application", :media => "all"
-        = javascript_include_tag "application"
-        = javascript_include_tag "//www.parsecdn.com/js/parse-1.2.17.min.js"
-        = csrf_meta_tags
-        = yield(:head)
+    %title= content_for?(:title) ? yield(:title) : "SnazzDat"
+    %meta{:content => content_for?(:description) ? yield(:description) : "SnazzDat", :name => "description"}
+    = favicon_link_tag 'favicon.ico'
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "//www.parsecdn.com/js/parse-1.2.17.min.js"
+    = javascript_include_tag '//maps.googleapis.com/maps/api/js?libraries=places'
+    = csrf_meta_tags
+    = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
     = render 'shared/error_modal'
     = render 'shared/fb_root'
@@ -37,12 +38,3 @@
                 SnazzDat Inc.
 :javascript
   Parse.initialize("#{LibConstants::PARSE_APP_ID}", "#{LibConstants::PARSE_JS_KEY}");
-  $(function(){
-    var current_location = #{@current_location.nil? ? 'undefined' : @current_location.to_json};
-    if(current_location === undefined) {
-      getUserLocation();
-    }
-     else {
-
-    }
-  });

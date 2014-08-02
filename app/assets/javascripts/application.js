@@ -6,9 +6,11 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require jasny-bootstrap.min
+//= require jquery.cookie
 //= require geo
+//= require places
 
-
+$.cookie.json = true;
 $(function(){
     $('.business-signup-form').submit(function (e) {
         var errors = false;
@@ -26,4 +28,7 @@ $(function(){
         }
 
     });
+    getUserLoation();
+    getPlaces();
+
 });

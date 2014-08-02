@@ -54,7 +54,6 @@ class AppointmentsController < ApplicationController
 
   def select_partner
     @partners = Partner.all
-    #@retailers = Retailer.all(userlocation: "#{get_location['lat']}, #{get_location['lng']}")
   end
 
   private
