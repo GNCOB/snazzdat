@@ -3,9 +3,10 @@
   window.fbAsyncInit = function() {
     Parse.FacebookUtils.init({
       appId      : "#{LibConstants::FACEBOOK_APP_ID}",
-      status     : false, // check login status
+      status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : false  // parse XFBML
+      xfbml      : false,  // parse XFBML
+      version    : 'v2.1'
     });
 
 
@@ -42,14 +43,13 @@
   };
 
     // Load the SDK asynchronously
-  (function(d){
-   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+  (function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
    if (d.getElementById(id)) {return;}
-   js = d.createElement('script'); js.id = id; js.async = true;
-   js.src = "//connect.facebook.net/en_US/all/debug.js";
-   ref.parentNode.insertBefore(js, ref);
-  }(document));
-
+   js = d.createElement(s); js.id = id;
+   js.src = "http://connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
   window.FBLogin = function() {
         Parse.FacebookUtils.logIn('email', {
@@ -97,7 +97,8 @@
             error: function(user, error) {
               console.log(error);
               console.log(user);
-              alert('Please grant us permissions in order to log in.  If you are having problems logging in, please contact us at admin@snazzdat.com');
+              $('#error-modal').find('.modal-body').text('There was an error logging you in. Please grant us permissions in order to log in.  If you are having problems logging in, please contact us at admin@snazzdat.com');
+              $('#error-modal').modal('show');
             }
           });
 

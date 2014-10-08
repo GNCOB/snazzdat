@@ -29,6 +29,5 @@ $(function(){
 
     });
     getUserLoation();
-    getPlaces();
 
 });

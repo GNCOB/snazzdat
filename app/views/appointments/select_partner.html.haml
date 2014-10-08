@@ -15,6 +15,7 @@
 
 :coffeescript
   $ ->
+    getPlaces()
     $('#nearby-places').on 'click', 'a', ->
         $(this).closest('li.list-group-item').html("<span class ='text-success'><strong>REQUEST SENT!</strong></span>")
     null
