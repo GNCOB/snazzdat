@@ -3,6 +3,7 @@
 
 inputs = %w[
   CollectionSelectInput
+  CollectionCheckBoxesInput
   DateTimeInput
   FileInput
   GroupedCollectionSelectInput

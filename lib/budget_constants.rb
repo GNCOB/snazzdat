@@ -9,7 +9,7 @@ module BudgetConstants
   RANGE_DEPENDS = {code: 7, name: "It Depends"}
   RANGE_OTHER = {code: 8, name: "Just Make Me Look Good"}
 
-  ALL = [ RANGE_0_100, RANGE_100_200, RANGE_200_300, RANGE_300_400, RANGE_400_500, RANGE_500_PLUS, RANGE_DEPENDS, RANGE_OTHER  ]
+  ALL = self.constants.map(&:to_s).map{|a|"#{self.to_s}::#{a}".constantize}
   
   
   def self.find_by_code code

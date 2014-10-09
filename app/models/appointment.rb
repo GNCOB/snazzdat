@@ -1,8 +1,8 @@
 class Appointment < ParseResource::Base
   belongs_to :user
   belongs_to :partner
-  #has_one :location
-  fields :date, :notes, :budget
+  has_many :appointment_item
+  fields :date, :notes, :budget, :phone_number, :appointment_item_type_codes
   validates :date, :budget, presence: true
   validate :is_date_in_past?
 

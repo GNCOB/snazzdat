@@ -67,7 +67,7 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:notes, :budget)
+    params.require(:appointment).permit(:notes, :budget, :phone_number, )
   end
 
   def set_date appointment_from_params
