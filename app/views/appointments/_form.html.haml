@@ -26,26 +26,60 @@
       =f.error(:date)
   =f.input :budget, label: 'What\'s your budget', collection: BudgetConstants::ALL.map{|b|[b[:name], b[:code]]}
   %h3 What would you like us to pick out for you?
-  .form-group.row
-    .col-xs-12
-      =f.collection_check_boxes :appointment_item_type_codes, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last, {item_wrapper_class:'checkbox'}
-  -ItemTypeConstants::ALL.each do |item_type|
-    .well
-      .form-group.row
-        .col-md-2.col-xs-12
-          ="#{item_type[:name]} Style:"
-        .col-md-10.col-xs-12
-          =collection_select :appointment_item, :item_type_codes, item_type[:types].map{|type| [type.gsub(' ','').downcase, type] }, :first, :last
-      -if item_type[:sizes].present?
+  -#ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}
+  -if @appointment.appointment_item.present?
+    .form-group.row
+      .col-xs-12
+        =collection_check_boxes :appointment_item, :item_type_code, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last, checked: @appointment.appointment_item.item_type_code, item_wrapper_class:'checkbox'
+    -ItemTypeConstants::ALL.each do |item_type|
+      -if @appointment.appointment_item.respond_to?("#{item_type[:name].downcase}_style")
+        .well
+          .form-group.row
+            .col-md-2.col-xs-12
+              ="#{item_type[:name]} Style:"
+            .col-md-10.col-xs-12
+              =collection_select :appointment_item, "#{item_type[:name].downcase}_style".to_sym, item_type[:types].map{|type| [type.gsub(' ','').downcase, type] }, :first, :last, selected: @appointment.appointment_item.send("#{item_type[:name].downcase}_style".to_sym), prompt: true
+          -if @appointment.appointment_item.respond_to?("#{item_type[:name].downcase}_size") && item_type[:sizes].present?
+            .form-group.row
+              .col-md-2.col-xs-12
+                ="#{item_type[:name]} Size Options:"
+              .col-md-1-.col-xs-12
+                =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last, selected: @appointment.appointment_item.send("#{item_type[:name].downcase}_size".to_sym), prompt: true
+          -if item_type[:code] == 2 && @appointment.appointment_item.respond_to?("#{item_type[:name].downcase}_size")
+            .form-group.row
+              .col-md-2.col-xs-12
+                ="#{item_type[:name]} Size Options:"
+              .col-md-1-.col-xs-12
+                =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, ItemTypeConstants::ALL_SHOE_SIZES_STR.map{|s|[s,s]}, :first, :last, selected: @appointment.appointment_item.send("#{item_type[:name].downcase}_size".to_sym), prompt: true
+
+  -else
+    .form-group.row
+      .col-xs-12
+        =collection_check_boxes :appointment_item, :item_type_code, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last, {item_wrapper_class:'checkbox'}
+    -ItemTypeConstants::ALL.each do |item_type|
+      .well
         .form-group.row
           .col-md-2.col-xs-12
-            ="#{item_type[:name]} Size Options:"
-          .col-md-1-.col-xs-12
-            =collection_select :appointment_item, :item_type_codes, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last
-    %hr/
+            ="#{item_type[:name]} Style:"
+          .col-md-10.col-xs-12
+            =collection_select :appointment_item, "#{item_type[:name].downcase}_style".to_sym, item_type[:types].map{|type| [type.gsub(' ','').downcase, type] }, :first, :last, prompt: true
+        -if item_type[:sizes].present?
+          .form-group.row
+            .col-md-2.col-xs-12
+              ="#{item_type[:name]} Size Options:"
+            .col-md-1-.col-xs-12
+              =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last, prompt: true
+        -if item_type[:code] == 2
+          .form-group.row
+            .col-md-2.col-xs-12
+              ="#{item_type[:name]} Size Options:"
+            .col-md-1-.col-xs-12
+              =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, ItemTypeConstants::ALL_SHOE_SIZES_STR.map{|s|[s,s]}, :first, :last, prompt: true
+      %hr/
 
-  =f.input :notes, label: 'Additional Notes', as: :text, input_html: {maxlength: '250'}, hint: 'Please add any additional details for the stylist; ex: preferred colors, style, etc. (250 character limit)'
-  =f.input :phone_number, label: 'Phone number you\'d like to be reached on', as: :tel
+    =f.input :notes, label: 'Additional Notes', as: :text, input_html: {maxlength: '250'}, hint: 'Please add any additional details for the stylist; ex: preferred colors, style, etc. (250 character limit)'
+    =f.input :phone_number, label: 'Phone number you\'d like to be reached on', as: :tel
+
   .form-actions
     =hidden_field_tag :partner_id, @partner.id
     =f.button :submit, class: 'btn btn-default'

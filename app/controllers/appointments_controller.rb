@@ -11,7 +11,15 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     @appointment.attributes = {user: current_user.to_pointer, partner: @partner}
     @appointment.date =  Appointment.to_date_object(set_date(params[:appointment]))
+
+    #create appointment_items
+    appointment_item_types = appointment_item_params[:item_type_code]
+    a = AppointmentItem.new(appointment_item_params)
+    a.item_type_code = appointment_item_types.reject(&:blank?).reject(&:nil?).map(&:to_i)
+
     if @appointment.save
+      a.attributes = {appointment: @appointment.to_pointer}
+      a.save
       AppointmentsMailer.user_new_appointment_notification(@appointment).deliver
       AppointmentsMailer.partner_new_appointment_notification(@appointment).deliver
       redirect_to user_appointments_path
@@ -36,7 +44,15 @@ class AppointmentsController < ApplicationController
     new_appointment_params = appointment_params
     new_appointment_params[:date] = Appointment.to_date_object(set_date(params[:appointment]))
     @appointment.date = new_appointment_params[:date]
+
+    #update appointment_items
+    a = AppointmentItem.find(@appointment.appointment_item.id)
+    a.attributes = appointment_item_params
+    appointment_item_types = appointment_item_params[:item_type_code]
+    a.item_type_code = appointment_item_types.reject(&:blank?).reject(&:nil?).map(&:to_i)
+
     if @appointment.valid? && @appointment.update(new_appointment_params)
+      a.update
       redirect_to user_appointment_path
       flash[:notice] = "Appointment Updated."
     else
@@ -45,6 +61,7 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
+    @appointment.appointment_item.destroy if @appointment.appointment_item.present?
     @appointment.destroy
     respond_to do |format|
       format.html { redirect_to user_appointments_path }
@@ -68,6 +85,10 @@ class AppointmentsController < ApplicationController
 
   def appointment_params
     params.require(:appointment).permit(:notes, :budget, :phone_number, )
+  end
+
+  def appointment_item_params
+    params.require(:appointment_item).permit(:jeans_style, :jeans_size,:shoes_style, :shoes_size, item_type_code: [])
   end
 
   def set_date appointment_from_params
