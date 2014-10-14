@@ -88,7 +88,7 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_item_params
-    params.require(:appointment_item).permit(:jeans_style, :jeans_size,:shoes_style, :shoes_size, item_type_code: [])
+    params.require(:appointment_item).permit(:jeans_style,:shoes_style, :shoes_size, item_type_code: [], jeans_size: [])
   end
 
   def set_date appointment_from_params

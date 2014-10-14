@@ -25,12 +25,14 @@
     .col-xs-12
       =f.error(:date)
   =f.input :budget, label: 'What\'s your budget', collection: BudgetConstants::ALL.map{|b|[b[:name], b[:code]]}
-  %h3 What would you like us to pick out for you?
-  -#ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}
+  %h5 What would you like us to pick out for you?
   -if @appointment.appointment_item.present?
     .form-group.row
       .col-xs-12
-        =collection_check_boxes :appointment_item, :item_type_code, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last, checked: @appointment.appointment_item.item_type_code, item_wrapper_class:'checkbox'
+        =collection_check_boxes :appointment_item, :item_type_code, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last, checked: @appointment.appointment_item.item_type_code do |b|
+          .checkbox-inline
+            %label
+              =b.label + b.check_box
     -ItemTypeConstants::ALL.each do |item_type|
       -if @appointment.appointment_item.respond_to?("#{item_type[:name].downcase}_style")
         .well
@@ -43,19 +45,25 @@
             .form-group.row
               .col-md-2.col-xs-12
                 ="#{item_type[:name]} Size Options:"
-              .col-md-1-.col-xs-12
-                =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last, selected: @appointment.appointment_item.send("#{item_type[:name].downcase}_size".to_sym), prompt: true
+              .col-md-10.col-xs-12
+                =collection_check_boxes :appointment_item, "#{item_type[:name].downcase}_size".to_sym, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last, checked: @appointment.appointment_item.send("#{item_type[:name].downcase}_size".to_sym), prompt: true do |b|
+                  .checkbox-inline
+                    %label
+                      =b.label + b.check_box
           -if item_type[:code] == 2 && @appointment.appointment_item.respond_to?("#{item_type[:name].downcase}_size")
             .form-group.row
               .col-md-2.col-xs-12
                 ="#{item_type[:name]} Size Options:"
-              .col-md-1-.col-xs-12
+              .col-md-10.col-xs-12
                 =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, ItemTypeConstants::ALL_SHOE_SIZES_STR.map{|s|[s,s]}, :first, :last, selected: @appointment.appointment_item.send("#{item_type[:name].downcase}_size".to_sym), prompt: true
 
   -else
     .form-group.row
       .col-xs-12
-        =collection_check_boxes :appointment_item, :item_type_code, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last, {item_wrapper_class:'checkbox'}
+        =collection_check_boxes :appointment_item, :item_type_code, ItemTypeConstants::ALL.map{|type|[type[:code], type[:name]]}, :first, :last do |b|
+          .checkbox-inline
+            %label
+              =b.label + b.check_box
     -ItemTypeConstants::ALL.each do |item_type|
       .well
         .form-group.row
@@ -67,13 +75,16 @@
           .form-group.row
             .col-md-2.col-xs-12
               ="#{item_type[:name]} Size Options:"
-            .col-md-1-.col-xs-12
-              =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last, prompt: true
+            .col-md-10.col-xs-12
+              =collection_check_boxes :appointment_item, "#{item_type[:name].downcase}_size".to_sym, item_type[:sizes].map{|size| [size.gsub(' ','').downcase, size] }, :first, :last, prompt: true do |b|
+                .checkbox-inline
+                  %label
+                    =b.label + b.check_box
         -if item_type[:code] == 2
           .form-group.row
             .col-md-2.col-xs-12
               ="#{item_type[:name]} Size Options:"
-            .col-md-1-.col-xs-12
+            .col-md-10.col-xs-12
               =collection_select :appointment_item, "#{item_type[:name].downcase}_size".to_sym, ItemTypeConstants::ALL_SHOE_SIZES_STR.map{|s|[s,s]}, :first, :last, prompt: true
       %hr/
 

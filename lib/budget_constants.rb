@@ -8,6 +8,7 @@ module BudgetConstants
   RANGE_500_PLUS = {code: 6, name:"$500+"}
   RANGE_DEPENDS = {code: 7, name: "It Depends"}
   RANGE_OTHER = {code: 8, name: "Just Make Me Look Good"}
+  RANGE_NOT_SURE = {code: 9, name: "Not Sure"}
 
   ALL = self.constants.map(&:to_s).map{|a|"#{self.to_s}::#{a}".constantize}
   

@@ -1,5 +1,5 @@
 module ItemTypeConstants
-  JEANS = {code:1, name:"Jeans", types: ['Boot Cut', 'Straight', 'Skinny'], sizes: ['24-32', 'Plus Size','Special Order']}
+  JEANS = {code:1, name:"Jeans", types: ['Boot Cut', 'Straight', 'Skinny'], sizes: ['24-26','28-30','30-32', '32-34', '34-36', 'Special Order']}
   SHOES = {code:2, name:"Shoes", types: ['Boot', 'Dress', 'Sneakers', 'Wedge', 'Pump', 'Sandal']}
 
 
