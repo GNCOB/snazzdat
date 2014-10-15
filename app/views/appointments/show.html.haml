@@ -12,8 +12,29 @@
     %strong Budget:
     =BudgetConstants.find_by_code(@appointment.budget)[:name]
 
+-if @appointment_item.present?
+  -@appointment_item.item_type_code.each do |item_type|
+    -if ItemTypeConstants.find_by_code(item_type) == ItemTypeConstants::JEANS
+      -if @appointment_item.jeans_style.present?
+        %p
+          %strong Jeans style:
+          =@appointment_item.jeans_style
+      -if @appointment_item.jeans_size.present?
+        %p
+          %strong Jeans size(s):
+          =@appointment_item.jeans_size.reject(&:blank?).join(', ')
+    -elsif ItemTypeConstants.find_by_code(item_type) == ItemTypeConstants::SHOES
+      -if @appointment_item.shoes_style.present?
+        %p
+          %strong Shoe style:
+          =@appointment_item.shoes_style
+      -if @appointment_item.shoes_size.present?
+        %p
+          %strong Shoe size:
+          =@appointment_item.shoes_size
+
 %p
-  %strong Addtional Notes:
+  %strong Additional Notes:
   %br/
   =@appointment.notes
 

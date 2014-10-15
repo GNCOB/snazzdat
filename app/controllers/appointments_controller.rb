@@ -30,6 +30,7 @@ class AppointmentsController < ApplicationController
   end
 
   def show
+    @appointment_item = @appointment.appointment_item
   end
 
   def index

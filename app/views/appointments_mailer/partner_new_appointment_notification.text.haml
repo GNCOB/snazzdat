@@ -1,19 +1,29 @@
 ="Hi #{@appointment.partner.name},"
 ="Please prepare an ensemble/look for #{@appointment.user.name} using the following preferences:"
+\
+Appointment Details:
+\
 
--if @appointment.user.size.present?
+-if @appointment_item.present?
+  -@appointment_item.item_type_code.each do |item_type|
+    -if ItemTypeConstants.find_by_code(item_type) == ItemTypeConstants::JEANS
+      ="Jeans style: #{@appointment_item.jeans_style}" if @appointment_item.jeans_style.present?
+      ="Jeans size(s): #{@appointment_item.jeans_size.join(', ')}" if @appointment_item.jeans_size.present?
+    -elsif ItemTypeConstants.find_by_code(item_type) == ItemTypeConstants::SHOES
+      ="Shoe style: #{@appointment_item.shoes_style}" if @appointment_item.shoes_style.present?
+      ="Shoe size: #{@appointment_item.shoes_size}" if @appointment_item.shoes_size.present?
+
+-if @size.present?
   \
-  Size Profile:
-  \
-  ="Neck: #{@appointment.user.size.neck}inches"
-  ="Chest: #{@appointment.user.size.chest}inches"
-  ="Sleeve: #{@appointment.user.size.sleeve}inches"
-  ="Bust: #{@appointment.user.size.bust}inches"
-  ="Waist: #{@appointment.user.size.waist}inches"
-  ="Hips: #{@appointment.user.size.hips}inches"
-  ="Inseam: #{@appointment.user.size.inseam}inches"
-  ="Height: #{@appointment.user.size.height}inches"
-  ="Weight: #{@appointment.user.size.weight}lbs"
+  ="Neck: #{@size.neck}inches" if @size.neck.present?
+  ="Chest: #{@size.chest}inches" if @size.chest.present?
+  ="Sleeve: #{@size.sleeve}inches" if @size.sleeve.present?
+  ="Bust: #{@size.bust}inches" if @size.bust.present?
+  ="Waist: #{@size.waist}inches" if @size.waist.present?
+  ="Hips: #{@size.hips}inches" if @size.hips.present?
+  ="Inseam: #{@size.inseam}inches" if @size.inseam.present?
+  ="Height: #{@size.height}inches" if @size.height.present?
+  ="Weight: #{@size.weight}lbs" if @size.weight.present?
 
 -if @appointment.budget.present?
   \
