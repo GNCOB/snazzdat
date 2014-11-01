@@ -101,6 +101,7 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     netrc (0.7.7)
+    newrelic_rpm (3.9.6.257)
     pg (0.16.0)
     polyglot (0.3.4)
     quiet_assets (1.0.2)
@@ -184,6 +185,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mime-types (>= 1.16)
+  newrelic_rpm
   parse_resource!
   pg (~> 0.16.0)
   quiet_assets

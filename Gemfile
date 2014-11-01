@@ -24,6 +24,7 @@ gem "parse_resource", :git => "https://github.com/sanarchy7/parse_resource.git"
 gem 'valid_email'
 gem 'geocoder'
 gem 'jquery-cookie-rails'
+gem 'newrelic_rpm'
 
 
 group :development do
